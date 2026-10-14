@@ -308,44 +308,47 @@
     background-size:180% 180%;
     animation:softGlow 5s ease-in-out infinite;
   }
-  /* Sóng biển chuyển động nhẹ trong nút "Thêm vào hôm nay" */
-  #qGo {
-    isolation:isolate;
-    text-shadow:0 1px 2px rgba(37,105,157,.16);
-  }
-  #qGo::before {
-    content:"";
-    position:absolute;
-    z-index:-1;
-    pointer-events:none;
-    left:-12%; right:-12%; bottom:-60%; height:105%;
-    border-radius:46% 48% 0 0 / 24% 30% 0 0;
-    background: rgba(222,244,255,.48);
-box-shadow: 0 -5px 0 rgba(226,247,255,.30),
-            0 -10px 0 rgba(255,255,255,.18);
-    transform:translateX(-4%) rotate(-2deg);
-    animation:buttonSeaWave 3s linear infinite;
-  }
-  #qGo:disabled::before { animation-play-state:paused; }
-  @keyframes buttonSeaWave {
-  0%, 100% {
-    transform: translateX(-6%) rotate(-2deg);
-    border-radius: 45% 55% 0 0 / 30% 22% 0 0;
-  }
+  /* Sóng biển mềm mại trong nút */
+#qGo {
+  isolation: isolate;
+  text-shadow: 0 1px 2px rgba(37,105,157,.16);
+}
 
-  25% {
-    transform: translateX(-2%) rotate(1deg);
-    border-radius: 55% 45% 0 0 / 20% 35% 0 0;
+#qGo::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  pointer-events: none;
+
+  left: -20%;
+  right: -20%;
+  bottom: -62%;
+  height: 125%;
+
+  border-radius: 48% 52% 0 0 / 12% 18% 0 0;
+
+  background: rgba(222,244,255,.48);
+  box-shadow:
+    0 -4px 0 rgba(226,247,255,.25),
+    0 -8px 0 rgba(255,255,255,.12);
+
+  transform: translateX(-3%) rotate(-1deg);
+  animation: buttonSeaWave 5s ease-in-out infinite;
+}
+
+#qGo:disabled::before {
+  animation-play-state: paused;
+}
+
+@keyframes buttonSeaWave {
+  0%, 100% {
+    transform: translateX(-3%) rotate(-1deg);
+    border-radius: 48% 52% 0 0 / 12% 18% 0 0;
   }
 
   50% {
-    transform: translateX(6%) rotate(2deg);
-    border-radius: 42% 58% 0 0 / 35% 20% 0 0;
-  }
-
-  75% {
-    transform: translateX(2%) rotate(-1deg);
-    border-radius: 58% 42% 0 0 / 22% 32% 0 0;
+    transform: translateX(3%) rotate(1deg);
+    border-radius: 52% 48% 0 0 / 18% 12% 0 0;
   }
 }
   @keyframes sparkleTurn {
