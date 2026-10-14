@@ -115,10 +115,10 @@
   .chip:active { transform:scale(.96); }
   .btn { border:1px solid var(--line); border-radius:13px; padding:12px 17px; background:#f2f8fd; font-weight:750; }
   .btn:hover { background:#e6f3fd; border-color:#c8e3f7; transform:translateY(-1px); }
-  .btn.primary { background:linear-gradient(135deg,#5aa3e0 0%,#7bc0f0 45%,#92d0f6 100%); border-color:transparent; color:#fff; box-shadow:0 5px 16px rgba(90,164,216,.32), 0 0 0 1px rgba(255,255,255,.2) inset; }
-  .btn.primary:hover { background:linear-gradient(135deg,#4a94d4 0%,#68b4e8 45%,#80c6f0 100%); box-shadow:0 8px 20px rgba(90,164,216,.42), 0 0 0 1px rgba(255,255,255,.28) inset; }
-  .btn.danger { color:#c04560; background:#fff0f3; border-color:#f5c8d2; }
-  .btn.danger:hover { background:#ffe4ea; border-color:#edb0bc; color:#a83650; }
+  .btn.primary { background:linear-gradient(135deg,#6caee3,#83c3ed); border-color:transparent; color:#fff; box-shadow:0 5px 13px rgba(102,174,232,.25); }
+  .btn.primary:hover { background:linear-gradient(135deg,#559bd7,#70b6e8); box-shadow:0 7px 17px rgba(102,174,232,.34); }
+  .btn.danger { color:#c95f76; background:#fff5f7; border-color:#f5dce2; }
+  .btn.danger:hover { background:#ffedf1; border-color:#edc5cf; }
   .btn:active { transform:scale(.985); }
   .btn:disabled { opacity:.5; cursor:not-allowed; transform:none; box-shadow:none; }
   .btn.block { width:100%; margin-top:13px; }
@@ -270,94 +270,6 @@
   .hero .big {
     animation:numberAppear .48s cubic-bezier(.2,.8,.2,1) backwards;
   }
-
-  /* --- Cảnh đồng cỏ + cây trong ô hero (đơn sắc, nhẹ) --- */
-  .hero .land {
-    position:absolute; inset:0; z-index:0; pointer-events:none; overflow:hidden;
-    border-radius:inherit;
-  }
-  .hero .lbl, .hero .big, .hero .bar, .hero .row2 { position:relative; z-index:1; }
-  .hero .clouds { position:absolute; top:10px; left:0; right:0; height:40px; }
-  .hero .cloud {
-    position:absolute; background:rgba(255,255,255,.28); border-radius:99px;
-    box-shadow:12px 0 0 -2px rgba(255,255,255,.22), 22px 3px 0 -4px rgba(255,255,255,.16);
-  }
-  .hero .cloud.c1 { width:28px; height:11px; top:6px; left:18%; animation:cloudDrift 22s ease-in-out infinite; }
-  .hero .cloud.c2 { width:36px; height:13px; top:2px; left:48%; animation:cloudDrift 28s ease-in-out infinite reverse; opacity:.9; }
-  .hero .cloud.c3 { width:22px; height:9px; top:14px; left:72%; animation:cloudDrift 19s ease-in-out infinite 3s; opacity:.75; }
-  .hero .tree {
-    position:absolute; right:14px; bottom:16px; width:74px; height:96px;
-    transform-origin:50% 100%;
-    animation:treeSway 5.5s ease-in-out infinite;
-  }
-  .hero .trunk {
-    position:absolute; left:50%; bottom:0; width:8px; height:40px; margin-left:-4px;
-    background:rgba(255,255,255,.34); border-radius:3px 3px 1px 1px;
-  }
-  .hero .foliage {
-    position:absolute; border-radius:50%; background:rgba(255,255,255,.38);
-  }
-  .hero .foliage.f1 { width:54px; height:50px; left:10px; top:2px; }
-  .hero .foliage.f2 { width:40px; height:38px; left:2px; top:20px; background:rgba(255,255,255,.30); }
-  .hero .foliage.f3 { width:36px; height:34px; left:36px; top:18px; background:rgba(255,255,255,.28); }
-  .hero .leaf {
-    position:absolute; width:8px; height:10px; background:rgba(255,255,255,.45);
-    border-radius:0 50% 50% 50%; opacity:0; pointer-events:none;
-  }
-  .hero .grass {
-    position:absolute; left:0; right:0; bottom:0; height:24px;
-    background:linear-gradient(to top, rgba(255,255,255,.16), transparent);
-  }
-  .hero .grass i {
-    position:absolute; bottom:0; width:3px; background:rgba(255,255,255,.34);
-    border-radius:2px 2px 0 0; transform-origin:50% 100%;
-  }
-  .hero .grass i:nth-child(1)  { left:4%;  height:12px; animation:grassWave 3.2s ease-in-out infinite; }
-  .hero .grass i:nth-child(2)  { left:11%; height:16px; animation:grassWave 2.8s ease-in-out infinite .2s; }
-  .hero .grass i:nth-child(3)  { left:18%; height:11px; animation:grassWave 3.5s ease-in-out infinite .4s; }
-  .hero .grass i:nth-child(4)  { left:26%; height:15px; animation:grassWave 2.9s ease-in-out infinite .1s; }
-  .hero .grass i:nth-child(5)  { left:34%; height:13px; animation:grassWave 3.1s ease-in-out infinite .3s; }
-  .hero .grass i:nth-child(6)  { left:42%; height:17px; animation:grassWave 2.7s ease-in-out infinite .5s; }
-  .hero .grass i:nth-child(7)  { left:51%; height:12px; animation:grassWave 3.4s ease-in-out infinite .15s; }
-  .hero .grass i:nth-child(8)  { left:59%; height:15px; animation:grassWave 2.6s ease-in-out infinite .35s; }
-  .hero .grass i:nth-child(9)  { left:67%; height:11px; animation:grassWave 3.3s ease-in-out infinite .25s; }
-  .hero .grass i:nth-child(10) { left:74%; height:16px; animation:grassWave 2.95s ease-in-out infinite .45s; }
-  .hero .grass i:nth-child(11) { left:81%; height:13px; animation:grassWave 3.15s ease-in-out infinite .1s; }
-  .hero .grass i:nth-child(12) { left:87%; height:15px; animation:grassWave 2.85s ease-in-out infinite .3s; }
-  .hero .grass i:nth-child(13) { left:92%; height:12px; animation:grassWave 3.4s ease-in-out infinite .2s; }
-  .hero .grass i:nth-child(14) { left:96%; height:14px; animation:grassWave 3.0s ease-in-out infinite .4s; }
-  .hero .grass i:nth-child(15) { left:99%; height:10px; animation:grassWave 2.7s ease-in-out infinite .15s; }
-
-  /* Trạng thái tiêu lố: cây thưa lá + rụng lá chậm */
-  .hero.over .foliage.f1 { width:42px; height:38px; left:14px; top:12px; opacity:.85; }
-  .hero.over .foliage.f2 { width:28px; height:26px; left:6px; top:28px; opacity:.7; }
-  .hero.over .foliage.f3 { width:24px; height:22px; left:36px; top:30px; opacity:.65; }
-  .hero.over .leaf { opacity:.75; animation:leafFall 6s linear infinite; }
-  .hero.over .leaf.lf1 { left:22px; top:18px; animation-delay:0s; }
-  .hero.over .leaf.lf2 { left:38px; top:12px; animation-delay:1.1s; }
-  .hero.over .leaf.lf3 { left:28px; top:26px; animation-delay:2.3s; }
-  .hero.over .leaf.lf4 { left:45px; top:20px; animation-delay:3.4s; }
-  .hero.over .leaf.lf5 { left:18px; top:30px; animation-delay:4.6s; }
-
-  @keyframes treeSway {
-    0%,100% { transform:rotate(-2.2deg); }
-    50%     { transform:rotate(2.5deg); }
-  }
-  @keyframes cloudDrift {
-    0%,100% { transform:translateX(0); }
-    50%     { transform:translateX(14px); }
-  }
-  @keyframes grassWave {
-    0%,100% { transform:rotate(-6deg); }
-    50%     { transform:rotate(7deg); }
-  }
-  @keyframes leafFall {
-    0%   { opacity:0; transform:translate(0,0) rotate(0deg); }
-    8%   { opacity:.8; }
-    70%  { opacity:.55; }
-    100% { opacity:0; transform:translate(18px,72px) rotate(160deg); }
-  }
-
   .stat {
     animation:fadeLift .55s cubic-bezier(.2,.8,.2,1) backwards;
   }
@@ -393,70 +305,8 @@
     animation:shineSweep .65s ease-out;
   }
   .btn.primary {
-    background:linear-gradient(135deg,#5aa3e0 0%,#7bc0f0 45%,#92d0f6 100%);
     background-size:180% 180%;
     animation:softGlow 5s ease-in-out infinite;
-    box-shadow:0 5px 16px rgba(90,164,216,.32), 0 0 0 1px rgba(255,255,255,.2) inset;
-  }
-  .btn.primary:hover {
-    background:linear-gradient(135deg,#4a94d4 0%,#68b4e8 45%,#80c6f0 100%);
-    box-shadow:0 8px 20px rgba(90,164,216,.42), 0 0 0 1px rgba(255,255,255,.28) inset;
-  }
-  /* Nút Thêm: viền sáng + ánh sáng lướt như chiếu gương */
-  #qGo.btn.primary, #eSave.btn.primary {
-    overflow:hidden;
-  }
-  #qGo.btn.primary::before, #eSave.btn.primary::before {
-    content:"";
-    position:absolute;
-    inset:-1px;
-    border-radius:inherit;
-    padding:1.5px;
-    background:linear-gradient(120deg,
-      rgba(255,255,255,.08),
-      rgba(255,255,255,.65) 35%,
-      rgba(255,255,255,.15) 55%,
-      rgba(255,255,255,.5) 75%,
-      rgba(255,255,255,.08));
-    background-size:220% 100%;
-    -webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite:xor;
-    mask-composite:exclude;
-    animation:borderShine 3.8s ease-in-out infinite;
-    pointer-events:none;
-  }
-  #qGo.btn.primary::after, #eSave.btn.primary::after {
-    content:"";
-    position:absolute;
-    top:-40%;
-    left:-80%;
-    width:55%;
-    height:180%;
-    transform:rotate(18deg);
-    background:linear-gradient(90deg,
-      transparent 0%,
-      rgba(255,255,255,.1) 30%,
-      rgba(255,255,255,.75) 50%,
-      rgba(255,255,255,.1) 70%,
-      transparent 100%);
-    opacity:.9;
-    animation:mirrorSweep 3.2s ease-in-out infinite;
-    pointer-events:none;
-  }
-  #qGo.btn.primary:hover::after, #eSave.btn.primary:hover::after {
-    animation:mirrorSweep .7s ease-out;
-  }
-  /* Nút xóa khoản chi */
-  .xdel {
-    border:0; background:transparent; color:#d96f83; width:34px; height:34px; border-radius:50%;
-    font-size:15px; flex:none; transition:background .18s, color .18s, transform .18s, box-shadow .18s;
-  }
-  .xdel:hover {
-    background:#ffe4ea; color:#c04560; transform:scale(1.08);
-    box-shadow:0 2px 8px rgba(217,111,131,.2);
-  }
-  .xdel:active {
-    transform:scale(.92); background:#ffd0da;
   }
   .chk input:checked + span {
     animation:checkPop .28s cubic-bezier(.2,.8,.2,1);
@@ -499,16 +349,6 @@
     0%,100% { background-position:0% 50%; }
     50% { background-position:100% 50%; }
   }
-  @keyframes borderShine {
-    0%,100% { background-position:0% 50%; }
-    50% { background-position:100% 50%; }
-  }
-  @keyframes mirrorSweep {
-    0%   { left:-80%; opacity:.35; }
-    40%  { opacity:.9; }
-    70%  { left:120%; opacity:.55; }
-    100% { left:140%; opacity:0; }
-  }
   @keyframes checkPop {
     0% { transform:scale(.82); }
     70% { transform:scale(1.12); }
@@ -521,16 +361,6 @@
   @media (max-width:600px) {
     .hero:before { width:155px; height:155px; }
     .hero:after { width:105px; height:105px; }
-    .hero .tree { right:8px; bottom:12px; width:54px; height:72px; }
-    .hero .trunk { height:30px; width:6px; margin-left:-3px; }
-    .hero .foliage.f1 { width:40px; height:36px; left:7px; top:2px; }
-    .hero .foliage.f2 { width:28px; height:26px; left:1px; top:16px; }
-    .hero .foliage.f3 { width:26px; height:24px; left:26px; top:14px; }
-    .hero.over .foliage.f1 { width:32px; height:28px; left:10px; top:8px; }
-    .hero.over .foliage.f2 { width:20px; height:18px; left:3px; top:20px; }
-    .hero.over .foliage.f3 { width:18px; height:16px; left:26px; top:22px; }
-    .hero .cloud.c1 { left:12%; }
-    .hero .cloud.c3 { left:68%; }
   }
 
   /* ---------- Hoạt ảnh nhẹ bổ sung ---------- */
@@ -638,40 +468,14 @@
   .day { position:relative; min-width:0; min-height:108px; padding:8px 8px 11px; border-radius:14px; background:#fff;
          border:1px solid #e3effa; cursor:pointer; display:flex; flex-direction:column; gap:3px; overflow:hidden;
          transition:transform .18s, box-shadow .18s, border-color .18s, background .18s, opacity .25s; }
-  .day::before {
-    content:"";
-    position:absolute; inset:0; border-radius:inherit; pointer-events:none; z-index:0;
-    background-image:
-      radial-gradient(circle at 88% 12%, rgba(102,174,232,.08) 0 1.5px, transparent 2px),
-      radial-gradient(circle at 12% 88%, rgba(102,174,232,.06) 0 1px, transparent 1.5px),
-      linear-gradient(135deg, transparent 40%, rgba(102,174,232,.035) 50%, transparent 60%);
-  }
-  .day > * { position:relative; z-index:1; }
   .day:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:#c8e3f7; }
   .day:active { transform:scale(.98); }
   .day.past { background:#f3f7fb; }
-  .day.past::before {
-    background-image:
-      radial-gradient(circle at 85% 15%, rgba(113,134,155,.07) 0 1.5px, transparent 2px),
-      linear-gradient(160deg, transparent 45%, rgba(113,134,155,.04) 55%, transparent 65%);
-  }
   .day.today { background:linear-gradient(160deg,#e6f4ff,#f9fcff); border-color:#8fcaf0; animation:todayGlow 3.4s ease-in-out infinite; }
-  .day.today::before {
-    background-image:
-      radial-gradient(circle at 90% 10%, rgba(102,174,232,.14) 0 2px, transparent 2.5px),
-      radial-gradient(circle at 14% 86%, rgba(102,174,232,.09) 0 1.5px, transparent 2px),
-      linear-gradient(140deg, transparent 38%, rgba(102,174,232,.07) 52%, transparent 62%);
-  }
   .day.void { background:transparent; border:1px dashed #e0edf7; box-shadow:none; pointer-events:none; }
-  .day.void::before { display:none; }
   .day.dim { opacity:.3; }
-  .day::after { content:""; position:absolute; left:8px; right:8px; bottom:0; height:3px; border-radius:3px 3px 0 0; background:transparent; transition:background .3s; z-index:1; }
+  .day::after { content:""; position:absolute; left:8px; right:8px; bottom:0; height:3px; border-radius:3px 3px 0 0; background:transparent; transition:background .3s; }
   .day.pos::after { background:#7fcdb9; } .day.neg::after { background:#eca3b1; }
-  .wk {
-    background-image:
-      radial-gradient(circle at 6% 20%, rgba(102,174,232,.045) 0 1px, transparent 1.5px),
-      radial-gradient(circle at 94% 80%, rgba(102,174,232,.04) 0 1px, transparent 1.5px);
-  }
   .top2 { display:flex; align-items:center; justify-content:space-between; }
   .dn { font-weight:800; font-size:14px; min-width:24px; height:24px; display:grid; place-items:center; border-radius:50%; }
   .day.today .dn { background:var(--accent); color:#fff; box-shadow:0 3px 8px rgba(102,174,232,.4); }
@@ -719,9 +523,44 @@
   .xm { display:flex; flex-direction:column; gap:1px; min-width:0; }
   .xm b { font-size:14.5px; font-variant-numeric:tabular-nums; }
   .xm span { font-size:12px; color:var(--muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .xdel { border:0; background:transparent; color:var(--bad); width:32px; height:32px; border-radius:50%; font-size:14px; flex:none; }
+  .xdel:hover { background:#fdecef; }
   .toast.act { pointer-events:auto; }
   .toast button { margin-left:12px; border:0; background:rgba(255,255,255,.22); color:#fff; padding:4px 11px; border-radius:99px; font-weight:700; }
   select.psel option { color:#20364d; }
+
+  /* Cảnh đồng cỏ đơn sắc trong thẻ ngân sách; tự chạy, không cần tương tác */
+  .hero { --scene-ink:rgba(38,104,143,.72); }
+  .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; color:var(--scene-ink); }
+  .hero > :not(.hero-scene) { position:relative; z-index:1; }
+  .landscape { position:absolute; right:-3px; bottom:0; width:min(59%,440px); height:100%; overflow:visible; }
+  .tree { transform-origin:346px 177px; animation:treeSway 6.8s ease-in-out infinite; }
+  .canopy { transform-origin:350px 75px; animation:canopySway 5.6s ease-in-out infinite; }
+  .cloud-one { animation:cloudDrift 19s ease-in-out infinite alternate; }
+  .cloud-two { animation:cloudDrift 24s ease-in-out infinite alternate-reverse; }
+  .falling-leaves { display:none; }
+  .hero.over { --scene-ink:rgba(139,62,76,.78); }
+  .hero.over .canopy { opacity:.58; }
+  .hero.over .tree-leaves { opacity:.38; }
+  .hero.over .falling-leaves { display:block; }
+  .hero.over .leaf-a { animation:leafFallA 7.8s ease-in infinite; }
+  .hero.over .leaf-b { animation:leafFallB 9.4s 1.5s ease-in infinite; }
+  .hero.over .leaf-c { animation:leafFallC 8.6s 3s ease-in infinite; }
+  .hero.over .leaf-d { animation:leafFallD 10s 4.4s ease-in infinite; }
+  .hero.over .cloud { opacity:.23; }
+  .fall { transform-box:fill-box; transform-origin:center; }
+  @keyframes treeSway { 0%,100% { transform:rotate(-1deg); } 50% { transform:rotate(1.2deg); } }
+  @keyframes canopySway { 0%,100% { transform:rotate(-1.4deg) translateX(-1px); } 50% { transform:rotate(1.7deg) translateX(2px); } }
+  @keyframes cloudDrift { from { transform:translateX(-7px); } to { transform:translateX(8px); } }
+  @keyframes leafFallA { 0% { transform:translate(330px,66px) rotate(0); opacity:0; } 12% { opacity:.8; } 75% { opacity:.75; } 100% { transform:translate(304px,176px) rotate(240deg); opacity:0; } }
+  @keyframes leafFallB { 0% { transform:translate(366px,58px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(389px,176px) rotate(-220deg); opacity:0; } }
+  @keyframes leafFallC { 0% { transform:translate(347px,75px) rotate(0); opacity:0; } 12% { opacity:.75; } 100% { transform:translate(340px,180px) rotate(280deg); opacity:0; } }
+  @keyframes leafFallD { 0% { transform:translate(385px,83px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(411px,177px) rotate(-260deg); opacity:0; } }
+  @media (max-width:600px) { .landscape { width:58%; opacity:.8; } .hero { padding-right:18px; } }
+  @media (prefers-reduced-motion:reduce) {
+    .tree,.canopy,.cloud-one,.cloud-two,.hero.over .fall { animation:none !important; }
+  }
+
 </style>
 </head>
 <body>
@@ -778,27 +617,41 @@
 
   <main id="app" class="hidden">
     <section class="hero" id="hero">
-      <div class="land" aria-hidden="true">
-        <div class="clouds">
-          <i class="cloud c1"></i>
-          <i class="cloud c2"></i>
-          <i class="cloud c3"></i>
-        </div>
-        <div class="tree">
-          <i class="trunk"></i>
-          <i class="foliage f1"></i>
-          <i class="foliage f2"></i>
-          <i class="foliage f3"></i>
-          <i class="leaf lf1"></i>
-          <i class="leaf lf2"></i>
-          <i class="leaf lf3"></i>
-          <i class="leaf lf4"></i>
-          <i class="leaf lf5"></i>
-        </div>
-        <div class="grass">
-          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
-          <i></i><i></i><i></i><i></i><i></i>
-        </div>
+      <div class="hero-scene" aria-hidden="true">
+        <svg class="landscape" viewBox="0 0 440 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <g class="cloud cloud-one" fill="currentColor" opacity=".48">
+            <ellipse cx="270" cy="24" rx="19" ry="7"/><circle cx="261" cy="20" r="7"/><circle cx="274" cy="17" r="10"/><circle cx="285" cy="22" r="6"/>
+          </g>
+          <g class="cloud cloud-two" fill="currentColor" opacity=".35">
+            <ellipse cx="350" cy="45" rx="16" ry="5.5"/><circle cx="343" cy="42" r="6"/><circle cx="354" cy="40" r="8"/><circle cx="363" cy="44" r="5"/>
+          </g>
+          <path class="distant-hill" d="M0 164 Q55 133 108 157 T220 151 T330 151 T440 145 V190 H0Z" fill="currentColor" opacity=".12"/>
+          <path class="grass" d="M0 174 Q65 163 130 172 T260 168 T440 171 V190 H0Z" fill="currentColor" opacity=".32"/>
+          <g class="tree" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M346 177 Q350 146 345 116 Q340 94 325 77 M346 132 Q366 108 377 83 M344 108 Q326 91 322 66 M356 151 Q379 140 393 120" fill="none" stroke-width="7" opacity=".82"/>
+            <g class="canopy" fill="currentColor" stroke="none">
+              <circle cx="323" cy="61" r="22"/><circle cx="344" cy="47" r="27"/><circle cx="367" cy="61" r="24"/>
+              <circle cx="388" cy="80" r="19"/><circle cx="351" cy="78" r="26"/><circle cx="314" cy="84" r="18"/>
+              <circle cx="379" cy="43" r="16"/>
+            </g>
+            <g class="tree-leaves" fill="currentColor" stroke="none">
+              <ellipse cx="315" cy="53" rx="5" ry="9" transform="rotate(-35 315 53)"/>
+              <ellipse cx="350" cy="27" rx="5" ry="9" transform="rotate(20 350 27)"/>
+              <ellipse cx="380" cy="60" rx="5" ry="9" transform="rotate(48 380 60)"/>
+              <ellipse cx="335" cy="83" rx="5" ry="9" transform="rotate(-20 335 83)"/>
+              <ellipse cx="390" cy="92" rx="5" ry="9" transform="rotate(35 390 92)"/>
+            </g>
+          </g>
+          <g class="falling-leaves" fill="currentColor">
+            <path class="fall leaf-a" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
+            <path class="fall leaf-b" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
+            <path class="fall leaf-c" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
+            <path class="fall leaf-d" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
+          </g>
+          <g class="ground-leaves" fill="currentColor" opacity=".8">
+            <path d="M305 178q10 -10 17 0q-9 6 -17 0Z"/><path d="M366 181q10 -10 17 0q-9 6 -17 0Z"/>
+          </g>
+        </svg>
       </div>
       <div class="lbl" id="hLbl">Hôm nay còn được tiêu</div>
       <div class="big" id="hBig">–</div>
