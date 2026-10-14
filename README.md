@@ -34,8 +34,8 @@ Vai trò: **GitHub** giữ mã · **Cloudflare** đưa web lên mạng (tự tri
 
 ```js
 window.APP_CONFIG = {
-  SUPABASE_URL: 'https://abcdxyz.supabase.co',
-  SUPABASE_KEY: 'sb_publishable_...'
+  SUPABASE_URL: 'https://fggbniifqrcgdkasilcc.supabase.co',
+  SUPABASE_KEY: 'sb_publishable_qrCpF3obpFcaRyU2mBoqPA_oJxaPRx3'
 };
 ```
 
