@@ -1159,12 +1159,37 @@ async function silentReload() {
   try { await loadAll(); refresh(); setStatus('ok'); } catch (e) { setStatus('error'); }
 }
 
+function celebrateQuickAdd() {
+  const btn = $('qGo');
+  if (!btn || REDUCE) return;
+  btn.classList.remove('added-pop');
+  void btn.offsetWidth;
+  btn.classList.add('added-pop');
+  setTimeout(() => btn.classList.remove('added-pop'), 520);
+  const r = btn.getBoundingClientRect();
+  const colors = ['#fff176', '#ff8fc7', '#7de7ff', '#a9f58b', '#c6a4ff', '#ffffff', '#ffad70'];
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('i');
+    el.className = 'q-spark' + (i % 3 === 0 ? ' dot' : '');
+    el.style.left = (r.left + r.width * (0.25 + Math.random() * 0.5)) + 'px';
+    el.style.top = (r.top + r.height * (0.2 + Math.random() * 0.6)) + 'px';
+    el.style.setProperty('--spark-color', colors[i % colors.length]);
+    el.style.color = colors[i % colors.length];
+    el.style.setProperty('--dx', ((Math.random() - .5) * 150) + 'px');
+    el.style.setProperty('--dy', (-25 - Math.random() * 85) + 'px');
+    el.style.setProperty('--turn', ((Math.random() - .5) * 180) + 'deg');
+    el.style.animationDelay = (Math.random() * 100) + 'ms';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1100);
+  }
+}
+
 async function addExpense(date, amount, note) {
   const tmp = { id: 'tmp-' + (++tmpN), spent_on: date, amount, note: note || '', created_at: new Date().toISOString() };
   S.expenses.push(tmp); FLASH = date; refresh();
   try {
     const row = await track(async () => must(await sb.from('expenses').insert({ spent_on: date, amount, note: note || '' }).select('id,created_at').single()));
-    tmp.id = row.id; tmp.created_at = row.created_at; cacheSave(); renderDaySheet();
+    tmp.id = row.id; tmp.created_at = row.created_at; cacheSave(); renderDaySheet(); celebrateQuickAdd();
   } catch (e) { S.expenses = S.expenses.filter((x) => x !== tmp); refresh(); fail(e); }
 }
 async function updateExpense(id, amount, note) {
