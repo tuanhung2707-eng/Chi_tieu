@@ -320,10 +320,11 @@
     pointer-events:none;
     left:-12%; right:-12%; bottom:-48%; height:105%;
     border-radius:46% 48% 0 0 / 24% 30% 0 0;
-    background:rgba(222,244,255,.30);
-    box-shadow:0 -5px 0 rgba(226,247,255,.18), 0 -10px 0 rgba(255,255,255,.10);
+    background: rgba(222,244,255,.48);
+box-shadow: 0 -5px 0 rgba(226,247,255,.30),
+            0 -10px 0 rgba(255,255,255,.18);
     transform:translateX(-4%) rotate(-2deg);
-    animation:buttonSeaWave 3s ease-in-out infinite;
+    animation:buttonSeaWave 3s linear infinite;
   }
   #qGo:disabled::before { animation-play-state:paused; }
   @keyframes buttonSeaWave {
