@@ -1,0 +1,9 @@
+{
+  // Tên này PHẢI trùng với tên Worker bạn đặt trên Cloudflare, nếu lệch thì build sẽ lỗi.
+  "name": "so-chi-tieu",
+  "compatibility_date": "2026-10-14",
+  // Chỉ phục vụ file tĩnh trong thư mục public, không cần mã Worker.
+  "assets": {
+    "directory": "./public"
+  }
+}
