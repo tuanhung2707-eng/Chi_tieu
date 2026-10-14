@@ -40,8 +40,15 @@
   /* Top bar */
   .top {
     position:sticky; top:0; z-index:4; display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:16px 0; margin:0 0 18px; background:rgba(241,248,255,.86);
-    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+    padding:16px 0; margin:0 0 18px; background:transparent;
+    border-bottom:0;
+  }
+  /* Nền topbar phủ hết chiều ngang màn hình, không tạo góc vuông ở mép wrap */
+  .top::before {
+    content:""; position:absolute; z-index:-1; pointer-events:none;
+    top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%);
+    background:rgba(241,248,255,.92);
+    -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
     border-bottom:1px solid rgba(220,234,246,.75);
   }
   .top h1 { font-size:21px; font-weight:800; letter-spacing:-.45px; margin:0; }
