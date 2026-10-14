@@ -528,37 +528,6 @@
   .toast.act { pointer-events:auto; }
   .toast button { margin-left:12px; border:0; background:rgba(255,255,255,.22); color:#fff; padding:4px 11px; border-radius:99px; font-weight:700; }
   select.psel option { color:#20364d; }
-
-  /* Cảnh đồng cỏ đơn sắc trong thẻ ngân sách; tự chạy, không cần tương tác */
-  .hero { --scene-ink:rgba(38,104,143,.72); }
-  .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; color:var(--scene-ink); }
-  .hero > :not(.hero-scene) { position:relative; z-index:1; }
-  .landscape { position:absolute; right:-3px; bottom:0; width:min(59%,440px); height:100%; overflow:visible; }
-  .tree { transform-origin:346px 177px; animation:treeSway 6.8s ease-in-out infinite; }
-  .canopy { transform-origin:350px 75px; animation:canopySway 5.6s ease-in-out infinite; }
-  .cloud-one { animation:cloudDrift 19s ease-in-out infinite alternate; }
-  .cloud-two { animation:cloudDrift 24s ease-in-out infinite alternate-reverse; }
-  .falling-leaves { display:none; }
-  .hero.over { --scene-ink:rgba(139,62,76,.78); }
-  .hero.over .canopy { opacity:.58; }
-  .hero.over .tree-leaves { opacity:.38; }
-  .hero.over .falling-leaves { display:block; }
-  .hero.over .leaf-a { animation:leafFallA 7.8s ease-in infinite; }
-  .hero.over .leaf-b { animation:leafFallB 9.4s 1.5s ease-in infinite; }
-  .hero.over .leaf-c { animation:leafFallC 8.6s 3s ease-in infinite; }
-  .hero.over .leaf-d { animation:leafFallD 10s 4.4s ease-in infinite; }
-  .hero.over .cloud { opacity:.23; }
-  .fall { transform-box:fill-box; transform-origin:center; }
-  @keyframes treeSway { 0%,100% { transform:rotate(-1deg); } 50% { transform:rotate(1.2deg); } }
-  @keyframes canopySway { 0%,100% { transform:rotate(-1.4deg) translateX(-1px); } 50% { transform:rotate(1.7deg) translateX(2px); } }
-  @keyframes cloudDrift { from { transform:translateX(-7px); } to { transform:translateX(8px); } }
-  @keyframes leafFallA { 0% { transform:translate(330px,66px) rotate(0); opacity:0; } 12% { opacity:.8; } 75% { opacity:.75; } 100% { transform:translate(304px,176px) rotate(240deg); opacity:0; } }
-  @keyframes leafFallB { 0% { transform:translate(366px,58px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(389px,176px) rotate(-220deg); opacity:0; } }
-  @keyframes leafFallC { 0% { transform:translate(347px,75px) rotate(0); opacity:0; } 12% { opacity:.75; } 100% { transform:translate(340px,180px) rotate(280deg); opacity:0; } }
-  @keyframes leafFallD { 0% { transform:translate(385px,83px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(411px,177px) rotate(-260deg); opacity:0; } }
-  @media (max-width:600px) { .landscape { width:58%; opacity:.8; } .hero { padding-right:18px; } }
- 
-
 </style>
 </head>
 <body>
@@ -615,42 +584,6 @@
 
   <main id="app" class="hidden">
     <section class="hero" id="hero">
-      <div class="hero-scene" aria-hidden="true">
-        <svg class="landscape" viewBox="0 0 440 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <g class="cloud cloud-one" fill="currentColor" opacity=".48">
-            <ellipse cx="270" cy="24" rx="19" ry="7"/><circle cx="261" cy="20" r="7"/><circle cx="274" cy="17" r="10"/><circle cx="285" cy="22" r="6"/>
-          </g>
-          <g class="cloud cloud-two" fill="currentColor" opacity=".35">
-            <ellipse cx="350" cy="45" rx="16" ry="5.5"/><circle cx="343" cy="42" r="6"/><circle cx="354" cy="40" r="8"/><circle cx="363" cy="44" r="5"/>
-          </g>
-          <path class="distant-hill" d="M0 164 Q55 133 108 157 T220 151 T330 151 T440 145 V190 H0Z" fill="currentColor" opacity=".12"/>
-          <path class="grass" d="M0 174 Q65 163 130 172 T260 168 T440 171 V190 H0Z" fill="currentColor" opacity=".32"/>
-          <g class="tree" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M346 177 Q350 146 345 116 Q340 94 325 77 M346 132 Q366 108 377 83 M344 108 Q326 91 322 66 M356 151 Q379 140 393 120" fill="none" stroke-width="7" opacity=".82"/>
-            <g class="canopy" fill="currentColor" stroke="none">
-              <circle cx="323" cy="61" r="22"/><circle cx="344" cy="47" r="27"/><circle cx="367" cy="61" r="24"/>
-              <circle cx="388" cy="80" r="19"/><circle cx="351" cy="78" r="26"/><circle cx="314" cy="84" r="18"/>
-              <circle cx="379" cy="43" r="16"/>
-            </g>
-            <g class="tree-leaves" fill="currentColor" stroke="none">
-              <ellipse cx="315" cy="53" rx="5" ry="9" transform="rotate(-35 315 53)"/>
-              <ellipse cx="350" cy="27" rx="5" ry="9" transform="rotate(20 350 27)"/>
-              <ellipse cx="380" cy="60" rx="5" ry="9" transform="rotate(48 380 60)"/>
-              <ellipse cx="335" cy="83" rx="5" ry="9" transform="rotate(-20 335 83)"/>
-              <ellipse cx="390" cy="92" rx="5" ry="9" transform="rotate(35 390 92)"/>
-            </g>
-          </g>
-          <g class="falling-leaves" fill="currentColor">
-            <path class="fall leaf-a" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-b" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-c" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-d" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-          </g>
-          <g class="ground-leaves" fill="currentColor" opacity=".8">
-            <path d="M305 178q10 -10 17 0q-9 6 -17 0Z"/><path d="M366 181q10 -10 17 0q-9 6 -17 0Z"/>
-          </g>
-        </svg>
-      </div>
       <div class="lbl" id="hLbl">Hôm nay còn được tiêu</div>
       <div class="big" id="hBig">–</div>
       <div class="bar"><i id="hBar"></i></div>
