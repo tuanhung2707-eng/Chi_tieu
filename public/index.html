@@ -308,6 +308,45 @@
     background-size:180% 180%;
     animation:softGlow 5s ease-in-out infinite;
   }
+
+  /* Hiệu ứng pháo hoa sao trắng quanh nút thêm chi tiêu */
+  #qGo { position:relative; overflow:visible; }
+  #qGo.added-pop { animation: starButtonImpact .62s cubic-bezier(.18,.8,.25,1.3), softGlow 5s ease-in-out infinite; }
+  @keyframes starButtonImpact {
+    0% { transform:scale(1); filter:brightness(1); }
+    22% { transform:scale(1.13); filter:brightness(1.55); }
+    48% { transform:scale(.96); filter:brightness(1.3); }
+    72% { transform:scale(1.045); filter:brightness(1.18); }
+    100% { transform:scale(1); filter:brightness(1); }
+  }
+  .q-star-burst { position:fixed; z-index:10000; left:0; top:0; width:0; height:0; pointer-events:none; color:#fff; }
+  .q-star-big {
+    position:absolute; left:0; top:0; color:#fff; font-family:Arial,sans-serif; font-size:var(--size,42px);
+    line-height:1; font-weight:900; opacity:0; white-space:nowrap;
+    text-shadow:0 0 4px #fff,0 0 12px rgba(255,255,255,.98),0 0 24px rgba(255,255,255,.82),0 0 38px rgba(205,231,255,.65);
+    transform:translate(-50%,-50%) scale(.05) rotate(-35deg);
+    animation:qBigStarBlast 1.05s cubic-bezier(.12,.7,.18,1) forwards;
+  }
+  @keyframes qBigStarBlast {
+    0% { opacity:0; transform:translate(-50%,-50%) scale(.05) rotate(-35deg); }
+    12% { opacity:1; transform:translate(-50%,-50%) scale(1.28) rotate(12deg); }
+    27% { opacity:1; transform:translate(calc(-50% + var(--dx)*.42),calc(-50% + var(--dy)*.42)) scale(1) rotate(0deg); }
+    72% { opacity:.98; transform:translate(calc(-50% + var(--dx)*.88),calc(-50% + var(--dy)*.88)) scale(.92) rotate(24deg); }
+    100% { opacity:0; transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.2) rotate(48deg); }
+  }
+  .q-star-trail {
+    position:absolute; left:0; top:0; color:#fff; font-family:Arial,sans-serif; font-size:var(--tiny-size,13px);
+    line-height:1; opacity:0; text-shadow:0 0 3px #fff,0 0 9px rgba(255,255,255,.95);
+    transform:translate(-50%,-50%) scale(.1); animation:qTinyStarFollow .82s ease-out forwards;
+  }
+  @keyframes qTinyStarFollow {
+    0% { opacity:0; transform:translate(-50%,-50%) scale(.1) rotate(0deg); }
+    18% { opacity:1; transform:translate(calc(-50% + var(--tx)*.15),calc(-50% + var(--ty)*.15)) scale(1.15) rotate(35deg); }
+    65% { opacity:.9; transform:translate(calc(-50% + var(--tx)*.7),calc(-50% + var(--ty)*.7)) scale(.8) rotate(95deg); }
+    100% { opacity:0; transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.05) rotate(150deg); }
+  }
+  @media (prefers-reduced-motion: reduce) { .q-star-burst,.q-star-big,.q-star-trail { display:none !important; } }
+
   /* Sóng biển mềm mại trong nút */
 #qGo {
   isolation: isolate;
@@ -1165,23 +1204,46 @@ function celebrateQuickAdd() {
   btn.classList.remove('added-pop');
   void btn.offsetWidth;
   btn.classList.add('added-pop');
-  setTimeout(() => btn.classList.remove('added-pop'), 520);
+  setTimeout(() => btn.classList.remove('added-pop'), 680);
+
   const r = btn.getBoundingClientRect();
-  const colors = ['#fff176', '#ff8fc7', '#7de7ff', '#a9f58b', '#c6a4ff', '#ffffff', '#ffad70'];
-  for (let i = 0; i < 18; i++) {
-    const el = document.createElement('i');
-    el.className = 'q-spark' + (i % 3 === 0 ? ' dot' : '');
-    el.style.left = (r.left + r.width * (0.25 + Math.random() * 0.5)) + 'px';
-    el.style.top = (r.top + r.height * (0.2 + Math.random() * 0.6)) + 'px';
-    el.style.setProperty('--spark-color', colors[i % colors.length]);
-    el.style.color = colors[i % colors.length];
-    el.style.setProperty('--dx', ((Math.random() - .5) * 150) + 'px');
-    el.style.setProperty('--dy', (-25 - Math.random() * 85) + 'px');
-    el.style.setProperty('--turn', ((Math.random() - .5) * 180) + 'deg');
-    el.style.animationDelay = (Math.random() * 100) + 'ms';
-    document.body.appendChild(el);
-    setTimeout(() => el.remove(), 1100);
+  const cx = r.left + r.width / 2;
+  const cy = r.top + r.height / 2;
+  const layer = document.createElement('span');
+  layer.className = 'q-star-burst';
+  layer.style.left = cx + 'px';
+  layer.style.top = cy + 'px';
+  document.body.appendChild(layer);
+
+  // Mười ngôi sao lớn bắn tỏa tròn; mỗi sao kéo theo một chuỗi sao nhỏ màu trắng.
+  for (let i = 0; i < 10; i++) {
+    const angle = (-Math.PI / 2) + (Math.PI * 2 * i / 10) + (Math.random() - .5) * .18;
+    const distance = 105 + Math.random() * 95;
+    const dx = Math.cos(angle) * distance;
+    const dy = Math.sin(angle) * distance;
+    const big = document.createElement('span');
+    big.className = 'q-star-big';
+    big.textContent = i % 2 === 0 ? '✦' : '✧';
+    big.style.setProperty('--dx', dx + 'px');
+    big.style.setProperty('--dy', dy + 'px');
+    big.style.setProperty('--size', (35 + Math.random() * 19) + 'px');
+    big.style.animationDelay = (Math.random() * 70) + 'ms';
+    layer.appendChild(big);
+
+    const trailCount = 7 + Math.floor(Math.random() * 4);
+    for (let j = 0; j < trailCount; j++) {
+      const tiny = document.createElement('span');
+      tiny.className = 'q-star-trail';
+      tiny.textContent = j % 3 === 0 ? '✦' : '✧';
+      const t = .18 + j * (.075 + Math.random() * .018);
+      tiny.style.setProperty('--tx', (dx * t + (Math.random() - .5) * 32) + 'px');
+      tiny.style.setProperty('--ty', (dy * t + (Math.random() - .5) * 32) + 'px');
+      tiny.style.setProperty('--tiny-size', (9 + Math.random() * 10) + 'px');
+      tiny.style.animationDelay = (35 + j * 24 + Math.random() * 45) + 'ms';
+      layer.appendChild(tiny);
+    }
   }
+  setTimeout(() => layer.remove(), 1450);
 }
 
 async function addExpense(date, amount, note) {
