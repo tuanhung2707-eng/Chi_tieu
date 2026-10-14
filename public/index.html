@@ -496,13 +496,32 @@
   .wkh { display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 4px 8px; font-size:12px; color:var(--muted); }
   .wkh b { color:var(--text); font-weight:800; }
   .wkh .wl { font-weight:750; color:var(--accent-deep); }
-  .day { position:relative; min-width:0; min-height:108px; padding:8px 8px 11px; border-radius:14px; background:#fff;
+  .day { position:relative; isolation:isolate; min-width:0; min-height:108px; padding:8px 8px 11px; border-radius:14px;
+         background-color:#fff;
+         background-image:radial-gradient(ellipse at 100% 100%, rgba(139,201,243,.16) 0%, transparent 52%),
+                          radial-gradient(ellipse at 0% 0%, rgba(178,218,192,.13) 0%, transparent 48%);
          border:1px solid #e3effa; cursor:pointer; display:flex; flex-direction:column; gap:3px; overflow:hidden;
-         transition:transform .18s, box-shadow .18s, border-color .18s, background .18s, opacity .25s; }
+         transition:transform .18s, box-shadow .18s, border-color .18s, background-color .18s, opacity .25s; }
+  /* Nét lá cách điệu phủ nền ô, không dùng biểu tượng nhỏ */
+  .day::before { content:""; position:absolute; z-index:-1; pointer-events:none; inset:0; border-radius:inherit;
+    background:
+      radial-gradient(ellipse 23px 10px at 96% 28%, transparent 58%, rgba(107,157,128,.15) 61% 68%, transparent 72%),
+      radial-gradient(ellipse 23px 10px at 82% 43%, transparent 58%, rgba(107,157,128,.12) 61% 68%, transparent 72%),
+      radial-gradient(ellipse 19px 8px at 91% 59%, transparent 58%, rgba(107,157,128,.12) 61% 68%, transparent 72%);
+    opacity:.85; }
+  .day:nth-child(3n+2) { background-image:radial-gradient(ellipse at 100% 0%, rgba(205,183,219,.17), transparent 54%), radial-gradient(ellipse at 0% 100%, rgba(139,201,243,.12), transparent 48%); }
+  .day:nth-child(3n+2)::before { background:
+      radial-gradient(ellipse 17px 24px at 90% 35%, transparent 57%, rgba(141,119,160,.14) 60% 67%, transparent 71%),
+      radial-gradient(ellipse 17px 24px at 76% 56%, transparent 57%, rgba(141,119,160,.11) 60% 67%, transparent 71%); }
+  .day:nth-child(3n) { background-image:radial-gradient(ellipse at 100% 100%, rgba(238,194,202,.18), transparent 55%), radial-gradient(ellipse at 0% 0%, rgba(224,214,169,.13), transparent 48%); }
+  .day:nth-child(3n)::before { background:
+      radial-gradient(ellipse 18px 8px at 88% 35%, transparent 56%, rgba(174,128,137,.14) 60% 68%, transparent 72%),
+      radial-gradient(ellipse 18px 8px at 76% 51%, transparent 56%, rgba(174,128,137,.12) 60% 68%, transparent 72%),
+      radial-gradient(ellipse 18px 8px at 92% 66%, transparent 56%, rgba(174,128,137,.10) 60% 68%, transparent 72%); }
   .day:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:#c8e3f7; }
   .day:active { transform:scale(.98); }
-  .day.past { background:#f3f7fb; }
-  .day.today { background:linear-gradient(160deg,#e6f4ff,#f9fcff); border-color:#8fcaf0; animation:todayGlow 3.4s ease-in-out infinite; }
+  .day.past { background-color:#f3f7fb; filter:saturate(.72); }
+  .day.today { background-color:#f2faff; background-image:linear-gradient(160deg,rgba(230,244,255,.88),rgba(249,252,255,.88)), radial-gradient(ellipse at 100% 100%,rgba(102,174,232,.16),transparent 58%); border-color:#8fcaf0; animation:todayGlow 3.4s ease-in-out infinite; }
   .day.void { background:transparent; border:1px dashed #e0edf7; box-shadow:none; pointer-events:none; }
   .day.dim { opacity:.3; }
   .day::after { content:""; position:absolute; left:8px; right:8px; bottom:0; height:3px; border-radius:3px 3px 0 0; background:transparent; transition:background .3s; }
@@ -512,21 +531,6 @@
   .day.today .dn { background:var(--accent); color:#fff; box-shadow:0 3px 8px rgba(102,174,232,.4); }
   .day .chk { width:20px; height:20px; }
   .day .chk span { inset:1px; font-size:10px; }
-  /* Họa tiết nhỏ đơn sắc ở góc dưới mỗi ô ngày */
-  .day-deco {
-    position:absolute;
-    right:5px;
-    bottom:3px;
-    z-index:0;
-    color:#6f9fbe;
-    opacity:.28;
-    font-size:17px;
-    line-height:1;
-    pointer-events:none;
-    user-select:none;
-  }
-  .day.today .day-deco { color:#347fb9; opacity:.32; }
-  .day.past .day-deco { color:#8ba0b2; opacity:.22; }
   .f.al { font-size:10.5px; color:var(--muted); line-height:1.25; }
   .f.sp { font-size:15px; font-weight:800; margin-top:1px; letter-spacing:-.2px; font-variant-numeric:tabular-nums; }
   .f.df { font-size:11.5px; font-weight:700; font-variant-numeric:tabular-nums; }
@@ -551,7 +555,6 @@
     .day .chk span { inset:0; font-size:8px; border-width:1.5px; }
     .f { display:none; }
     .c { display:block; }
-    .day-deco { right:3px; bottom:2px; font-size:12px; opacity:.24; }
     .c.sp { font-size:11.5px; font-weight:800; line-height:1.2; font-variant-numeric:tabular-nums; }
     .c.df { font-size:10px; font-weight:700; line-height:1.2; }
     .c.dotn { font-style:normal; font-size:9px; opacity:.55; line-height:1; }
@@ -1048,12 +1051,9 @@ function cellHtml(x, tdy, idx, dim) {
   const cmp = '<div class="c sp">' + (x.spent === null ? '<span class="muted">' + fmtK(x.allowed) + '</span>' : fmtK(x.spent)) + '</div>' +
     (x.diff === null ? '' : '<div class="c df ' + dcls + '">' + fmtKs(x.diff) + '</div>') +
     (x.note ? '<i class="c dotn">✎</i>' : '');
-  const decor = ['❀', '❧', '♡', '⌒'];
-  const deco = decor[(dn + new Date(x.date + 'T00:00:00Z').getUTCDay()) % decor.length];
   return '<div class="' + cls + '" data-date="' + esc(x.date) + '" style="--i:' + idx + '">' +
     '<div class="top2"><span class="dn">' + dn + '</span><label class="chk"><input type="checkbox" ' + (x.passed ? 'checked' : '') +
-    ' aria-label="Đã qua"><span>✓</span></label></div>' + full + cmp +
-    '<span class="day-deco" aria-hidden="true">' + deco + '</span></div>';
+    ' aria-label="Đã qua"><span>✓</span></label></div>' + full + cmp + '</div>';
 }
 
 function render() {
