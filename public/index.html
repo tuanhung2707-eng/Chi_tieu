@@ -528,6 +528,66 @@
   .toast.act { pointer-events:auto; }
   .toast button { margin-left:12px; border:0; background:rgba(255,255,255,.22); color:#fff; padding:4px 11px; border-radius:99px; font-weight:700; }
   select.psel option { color:#20364d; }
+
+
+  /* ---------- Trang trí nhẹ: số tiền hôm nay, nút thêm và lịch ---------- */
+  .hero {
+    box-shadow:0 14px 32px rgba(90,164,216,.24), inset 0 1px 0 rgba(255,255,255,.24);
+    background-size:180% 180%;
+    animation:heroBreath 7s ease-in-out infinite;
+  }
+  .hero .big {
+    display:inline-block;
+    transform-origin:left center;
+    text-shadow:0 3px 16px rgba(36,101,151,.16);
+    animation:moneyFloat 3.6s ease-in-out infinite;
+  }
+  .hero .bar { box-shadow:inset 0 1px 2px rgba(43,104,149,.08); }
+  .hero .bar > i { box-shadow:0 0 10px rgba(255,255,255,.42); }
+  #qGo {
+    min-height:48px;
+    letter-spacing:.1px;
+    background:linear-gradient(110deg,#62a9e2,#82c5ed,#62a9e2);
+    background-size:220% 100%;
+    box-shadow:0 7px 16px rgba(86,164,220,.25);
+    transition:transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  }
+  #qGo:hover { transform:translateY(-2px); box-shadow:0 10px 21px rgba(86,164,220,.32); filter:saturate(1.06); }
+  #qGo:active { transform:translateY(1px) scale(.99); box-shadow:0 3px 8px rgba(86,164,220,.2); }
+  #qGo::before {
+    content:"✦"; display:inline-block; margin-right:8px; opacity:.9;
+    animation:buttonSparkle 2.4s ease-in-out infinite;
+  }
+  #qGo::after { opacity:.42; animation:buttonShimmer 4.2s ease-in-out infinite; }
+  .lh h2 { display:flex; align-items:center; gap:8px; }
+  .lh h2::before { content:"▦"; color:var(--accent); font-size:1.1em; }
+  .dow span { padding:4px 0 6px; border-radius:9px; transition:background .2s, transform .2s; }
+  .dow span:hover { background:#e4f2fd; transform:translateY(-1px); }
+  .wk { transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease; }
+  .wk:hover { box-shadow:0 7px 22px rgba(71,128,171,.1); }
+  .wkh { border-bottom:1px solid rgba(220,234,246,.72); margin-bottom:8px; }
+  .wkh .wl { display:inline-flex; align-items:center; gap:5px; }
+  .day { box-shadow:0 2px 5px rgba(71,128,171,.025); }
+  .day:not(.void)::before {
+    content:""; position:absolute; width:70px; height:70px; top:-42px; right:-42px;
+    border-radius:50%; background:rgba(132,199,239,.10); pointer-events:none;
+    transition:transform .28s ease, background .28s ease;
+  }
+  .day:hover::before { transform:scale(1.65); background:rgba(132,199,239,.17); }
+  .day.today { box-shadow:0 0 0 1px rgba(130,196,236,.16),0 5px 15px rgba(102,174,232,.10); }
+  .day.today .dn { animation:todayDot 3s ease-in-out infinite; }
+  .day.pos::after,.day.neg::after { height:4px; }
+  .day.flash { z-index:1; }
+  @keyframes heroBreath { 0%,100% { background-position:0% 50%; } 50% { background-position:100% 50%; } }
+  @keyframes moneyFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-2px); } }
+  @keyframes buttonSparkle { 0%,100% { transform:rotate(0) scale(1); } 50% { transform:rotate(18deg) scale(1.18); } }
+  @keyframes buttonShimmer { 0%,65%,100% { left:-75%; opacity:0; } 72% { opacity:.8; } 88% { left:140%; opacity:0; } }
+  @keyframes todayDot { 0%,100% { box-shadow:0 3px 8px rgba(102,174,232,.28); } 50% { box-shadow:0 3px 12px rgba(102,174,232,.55); } }
+  @media (prefers-reduced-motion:reduce) {
+    .hero,.hero .big,#qGo::before,#qGo::after,.day.today .dn,.day.today { animation:none !important; scroll-behavior:auto !important; }
+    *,*::before,*::after { transition-duration:.01ms !important; }
+  }
+
 </style>
 </head>
 <body>
