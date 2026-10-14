@@ -502,22 +502,24 @@
                           radial-gradient(ellipse at 0% 0%, rgba(178,218,192,.13) 0%, transparent 48%);
          border:1px solid #e3effa; cursor:pointer; display:flex; flex-direction:column; gap:3px; overflow:hidden;
          transition:transform .18s, box-shadow .18s, border-color .18s, background-color .18s, opacity .25s; }
-  /* Nét lá cách điệu phủ nền ô, không dùng biểu tượng nhỏ */
-  .day::before { content:""; position:absolute; z-index:-1; pointer-events:none; inset:0; border-radius:inherit;
-    background:
-      radial-gradient(ellipse 23px 10px at 96% 28%, transparent 58%, rgba(107,157,128,.15) 61% 68%, transparent 72%),
-      radial-gradient(ellipse 23px 10px at 82% 43%, transparent 58%, rgba(107,157,128,.12) 61% 68%, transparent 72%),
-      radial-gradient(ellipse 19px 8px at 91% 59%, transparent 58%, rgba(107,157,128,.12) 61% 68%, transparent 72%);
-    opacity:.85; }
-  .day:nth-child(3n+2) { background-image:radial-gradient(ellipse at 100% 0%, rgba(205,183,219,.17), transparent 54%), radial-gradient(ellipse at 0% 100%, rgba(139,201,243,.12), transparent 48%); }
-  .day:nth-child(3n+2)::before { background:
-      radial-gradient(ellipse 17px 24px at 90% 35%, transparent 57%, rgba(141,119,160,.14) 60% 67%, transparent 71%),
-      radial-gradient(ellipse 17px 24px at 76% 56%, transparent 57%, rgba(141,119,160,.11) 60% 67%, transparent 71%); }
-  .day:nth-child(3n) { background-image:radial-gradient(ellipse at 100% 100%, rgba(238,194,202,.18), transparent 55%), radial-gradient(ellipse at 0% 0%, rgba(224,214,169,.13), transparent 48%); }
-  .day:nth-child(3n)::before { background:
-      radial-gradient(ellipse 18px 8px at 88% 35%, transparent 56%, rgba(174,128,137,.14) 60% 68%, transparent 72%),
-      radial-gradient(ellipse 18px 8px at 76% 51%, transparent 56%, rgba(174,128,137,.12) 60% 68%, transparent 72%),
-      radial-gradient(ellipse 18px 8px at 92% 66%, transparent 56%, rgba(174,128,137,.10) 60% 68%, transparent 72%); }
+  /* Họa tiết chìm đơn sắc phủ nền ô ngày: hoa, lá, thú cưng và đồ dùng */
+  .day::before {
+    content:"✿";
+    position:absolute; z-index:-1; pointer-events:none;
+    right:5px; bottom:-10px;
+    font-family:ui-rounded,system-ui,sans-serif;
+    font-size:48px; line-height:1;
+    font-weight:400;
+    color:rgba(92,145,177,.15);
+    transform:rotate(-12deg);
+  }
+  .day:nth-child(6n+2)::before { content:"❧"; color:rgba(94,151,119,.17); font-size:54px; right:1px; bottom:-12px; transform:rotate(12deg); }
+  .day:nth-child(6n+3)::before { content:"₫"; color:rgba(91,143,185,.13); font-size:45px; right:8px; bottom:-7px; transform:rotate(-8deg); }
+  .day:nth-child(6n+4)::before { content:"ᓚᘏᗢ"; color:rgba(137,116,158,.16); font-size:26px; right:2px; bottom:3px; transform:rotate(-5deg); }
+  .day:nth-child(6n+5)::before { content:"૮ ˶ᵔ ﻌ ᵔ˶ ა"; color:rgba(174,128,137,.16); font-size:22px; right:-2px; bottom:5px; transform:rotate(4deg); }
+  .day:nth-child(6n)::before { content:"✎  ╱"; color:rgba(172,145,91,.17); font-size:35px; right:3px; bottom:-4px; transform:rotate(-25deg); }
+  .day:nth-child(3n+2) { background-image:linear-gradient(135deg,rgba(205,183,219,.17),rgba(255,255,255,.3) 72%); }
+  .day:nth-child(3n) { background-image:linear-gradient(135deg,rgba(238,194,202,.18),rgba(255,255,255,.28) 72%); }
   .day:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:#c8e3f7; }
   .day:active { transform:scale(.98); }
   .day.past { background-color:#f3f7fb; filter:saturate(.72); }
