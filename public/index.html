@@ -318,7 +318,7 @@
     position:absolute;
     z-index:-1;
     pointer-events:none;
-    left:-12%; right:-12%; bottom:-48%; height:105%;
+    left:-12%; right:-12%; bottom:-60%; height:105%;
     border-radius:46% 48% 0 0 / 24% 30% 0 0;
     background: rgba(222,244,255,.48);
 box-shadow: 0 -5px 0 rgba(226,247,255,.30),
@@ -328,21 +328,26 @@ box-shadow: 0 -5px 0 rgba(226,247,255,.30),
   }
   #qGo:disabled::before { animation-play-state:paused; }
   @keyframes buttonSeaWave {
-    0%,100% { transform:translateX(-4%) rotate(-2deg); border-radius:46% 48% 0 0 / 24% 30% 0 0; }
-    50% { transform:translateX(4%) rotate(1.5deg); border-radius:51% 43% 0 0 / 30% 22% 0 0; }
+  0%, 100% {
+    transform: translateX(-6%) rotate(-2deg);
+    border-radius: 45% 55% 0 0 / 30% 22% 0 0;
   }
-  .chk input:checked + span {
-    animation:checkPop .28s cubic-bezier(.2,.8,.2,1);
+
+  25% {
+    transform: translateX(-2%) rotate(1deg);
+    border-radius: 55% 45% 0 0 / 20% 35% 0 0;
   }
-  .pill .dot {
-    box-shadow:0 0 0 3px rgba(54,155,131,.10);
+
+  50% {
+    transform: translateX(6%) rotate(2deg);
+    border-radius: 42% 58% 0 0 / 35% 20% 0 0;
   }
-  .toast.on {
-    animation:toastEnter .25s cubic-bezier(.2,.8,.2,1);
+
+  75% {
+    transform: translateX(2%) rotate(-1deg);
+    border-radius: 58% 42% 0 0 / 22% 32% 0 0;
   }
-  .sheet {
-    background-image:radial-gradient(circle at 100% 0%,rgba(196,229,251,.2),transparent 34%);
-  }
+}
   @keyframes sparkleTurn {
     0%,75%,100% { transform:rotate(0) scale(1); opacity:.85; }
     82% { transform:rotate(22deg) scale(1.22); opacity:1; }
