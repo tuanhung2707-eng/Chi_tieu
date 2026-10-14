@@ -347,51 +347,20 @@
   }
   @media (prefers-reduced-motion: reduce) { .q-star-burst,.q-star-big,.q-star-trail { display:none !important; } }
 
-  /* Sóng biển mềm mại trong nút */
-#qGo {
-  overflow: hidden;
-  border-radius: inherit;
-  isolation: isolate;
-  text-shadow: 0 1px 2px rgba(37,105,157,.16);
-}
-
-#qGo::before {
-  content: "";
-  position: absolute;
-  z-index: -1;
-  pointer-events: none;
-
-  left: -20%;
-  right: -20%;
-  bottom: -62%;
-  height: 125%;
-
-  border-radius: 48% 52% 0 0 / 12% 18% 0 0;
-
-  background: rgba(222,244,255,.48);
-  box-shadow:
-    0 -4px 0 rgba(226,247,255,.25),
-    0 -8px 0 rgba(255,255,255,.12);
-
-  transform: translateX(-3%) rotate(-1deg);
-  animation: buttonSeaWave 5s ease-in-out infinite;
-}
-
-#qGo:disabled::before {
-  animation-play-state: paused;
-}
-
-@keyframes buttonSeaWave {
-  0%, 100% {
-    transform: translateX(-3%) rotate(-1deg);
-    border-radius: 48% 52% 0 0 / 12% 18% 0 0;
+  /* Khóa toàn bộ hiệu ứng bên trong đúng đường bo của nút */
+  #qGo {
+    position:relative !important;
+    overflow:hidden !important;
+    border-radius:14px !important;
+    isolation:isolate;
+    clip-path: inset(0 round 14px);
+    text-shadow:0 1px 2px rgba(37,105,157,.16);
   }
-
-  50% {
-    transform: translateX(3%) rotate(1deg);
-    border-radius: 52% 48% 0 0 / 18% 12% 0 0;
-  }
-}
+  /* Tắt lớp sóng cũ vốn tràn khỏi nút */
+  #qGo::before { content:none !important; animation:none !important; }
+  /* Ánh sáng hover được cắt theo bo góc, không văng ra ngoài */
+  #qGo::after { border-radius:14px; }
+  #qGo:hover::after { border-radius:14px; }
   @keyframes sparkleTurn {
     0%,75%,100% { transform:rotate(0) scale(1); opacity:.85; }
     82% { transform:rotate(22deg) scale(1.22); opacity:1; }
