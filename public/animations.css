@@ -380,8 +380,7 @@
 }
 .wk .day.void { background: transparent; }
 
-/*trang trí nền*/
-```css
+/* trang trí nền */
 /* ==========================================
    CONCEPT: PASTEL OCEAN — ĐẠI DƯƠNG ÊM DỊU
    ========================================== */
@@ -527,5 +526,76 @@ body {
     animation: none !important;
   }
 }
-```
 
+
+/* ---------- 10. Biển cả hai bên trang (rong biển, cá, cua, rùa, mỏm đá) – đơn sắc ---------- */
+/* Chỉ hiện khi hai bên trang còn đủ chỗ trống (màn hình rộng từ ~1140px). Điện thoại/máy tính bảng thì ẩn.
+   Mọi kích thước đều tính theo bề rộng chỗ trống (--gw) nên cảnh tự to ra trên màn hình lớn. */
+.sea-defs { position:absolute; width:0; height:0; overflow:hidden; }
+.sea { display:none; }
+@media (min-width:1140px) {
+  .sea {
+    --gw: calc((100vw - 980px) / 2);                 /* bề rộng chỗ trống mỗi bên */
+    --sea-ink: rgba(44,118,172,.62);                 /* màu duy nhất của cả cảnh: sửa ở đây để đổi màu */
+    display:block; position:fixed; top:0; bottom:0; width:var(--gw); z-index:0; overflow:hidden; pointer-events:none;
+    color:var(--sea-ink);
+  }
+  .sea-l { left:0; } .sea-r { right:0; }
+  .sea svg { display:block; width:100%; height:auto; overflow:visible; }
+  .sea .it { position:absolute; }
+  /* đáy biển */
+  .sea::after {
+    content:""; position:absolute; left:-10%; right:-10%; bottom:-14px; height:56px; border-radius:50% 50% 0 0 / 70% 70% 0 0;
+    background:currentColor; opacity:.15;
+  }
+
+  /* mỏm đá */
+  .rock-tall { left:-3%; bottom:-2px; width:max(60px,calc(var(--gw) * .52)); opacity:.55; }
+  .rock-low  { left:36%; bottom:-2px; width:max(70px,calc(var(--gw) * .68)); opacity:.5; }
+  .sea-r .rock-tall { left:auto; right:-3%; transform:scaleX(-1); }
+  .sea-r .rock-low  { left:auto; right:34%; transform:scaleX(-1); }
+  .starfish { bottom:7px; width:max(16px,calc(var(--gw) * .09)); opacity:.6; }
+
+  /* rong biển lay chậm */
+  .weed { bottom:-2px; width:max(16px,calc(var(--gw) * .11)); opacity:.55; transform-origin:50% 100%;
+          animation:weedSway var(--t,7s) ease-in-out var(--dl,0s) infinite alternate; }
+  .weed.tall { width:max(20px,calc(var(--gw) * .14)); opacity:.48; }
+  @keyframes weedSway { from { transform:rotate(-4deg) skewX(-3deg); } to { transform:rotate(4.5deg) skewX(3deg); } }
+
+  /* cá bơi ngang rồi quay đầu ở hai mép; cả đàn bơi cùng nhịp */
+  .fish { left:7px; --wd:max(13px,calc(var(--gw) * var(--f,.15))); width:var(--wd); opacity:.55;
+          --sx:max(0px,calc(var(--gw) - var(--wd) - 14px)); animation:swim var(--t,30s) linear var(--dl,0s) infinite; }
+  .fish svg { animation:fishBob 3.2s ease-in-out infinite alternate; }
+  @keyframes swim {
+    0%   { transform:translateX(0) scaleX(1); }
+    46%  { transform:translateX(var(--sx)) scaleX(1); }
+    50%  { transform:translateX(var(--sx)) scaleX(-1); }
+    96%  { transform:translateX(0) scaleX(-1); }
+    100% { transform:translateX(0) scaleX(1); }
+  }
+  @keyframes fishBob { from { transform:translateY(-3px) rotate(-3deg); } to { transform:translateY(3px) rotate(3deg); } }
+
+  /* cua đi ngang trên đáy biển, càng cua vẫy */
+  .crab { left:6%; bottom:5px; --cw:max(50px,calc(var(--gw) * .3)); width:var(--cw); opacity:.62;
+          --walk:max(0px,calc(var(--gw) - var(--cw) - 40px)); animation:crabWalk var(--t,32s) ease-in-out var(--dl,0s) infinite alternate; }
+  .crab svg { animation:crabBob .9s ease-in-out infinite alternate; }
+  .claw { transform-box:view-box; }
+  .claw-l { transform-origin:18px 30px; animation:clawL 2.4s ease-in-out infinite alternate; }
+  .claw-r { transform-origin:78px 30px; animation:clawR 2.4s ease-in-out .5s infinite alternate; }
+  @keyframes crabWalk { from { transform:translateX(0); } to { transform:translateX(var(--walk)); } }
+  @keyframes crabBob { from { transform:translateY(0); } to { transform:translateY(-1.5px); } }
+  @keyframes clawL { from { transform:rotate(-9deg); } to { transform:rotate(7deg); } }
+  @keyframes clawR { from { transform:rotate(9deg); } to { transform:rotate(-7deg); } }
+  .crab.small { --cw:max(36px,calc(var(--gw) * .2)); left:auto; right:12%; opacity:.5; }
+  .crab.small { animation-direction:alternate-reverse; }
+
+  /* rùa lướt chậm, chân chèo vỗ nhẹ */
+  .turtle { left:7px; --wd:max(66px,calc(var(--gw) * .5)); width:var(--wd); opacity:.6;
+            --sx:max(0px,calc(var(--gw) - var(--wd) - 14px)); animation:swim 78s linear -20s infinite; }
+  .turtle svg { animation:turtleBob 6s ease-in-out infinite alternate; }
+  .fl { transform-box:view-box; animation:flipper 2.6s ease-in-out infinite alternate; }
+  .fl-f { transform-origin:72px 40px; }
+  .fl-r { transform-origin:26px 40px; animation-delay:-1.3s; }
+  @keyframes turtleBob { from { transform:translateY(-8px) rotate(-2deg); } to { transform:translateY(8px) rotate(2deg); } }
+  @keyframes flipper { from { transform:rotate(-14deg); } to { transform:rotate(12deg); } }
+}
