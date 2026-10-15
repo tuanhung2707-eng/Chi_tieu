@@ -535,7 +535,7 @@ body {
 .sea { display:none; }
 @media (min-width:1140px) {
   .sea {
-    --gw: calc((130vw - 1000px) / 2);                 /* bề rộng chỗ trống mỗi bên */
+    --gw: calc((110vw - 980px) / 2);                 /* bề rộng chỗ trống mỗi bên */
     --sea-ink: rgba(44,118,172,.62);                 /* màu duy nhất của cả cảnh: sửa ở đây để đổi màu */
     display:block; position:fixed; top:0; bottom:0; width:var(--gw); z-index:0; overflow:hidden; pointer-events:none;
     color:var(--sea-ink);
