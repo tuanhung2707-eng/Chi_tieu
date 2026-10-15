@@ -528,28 +528,4 @@ body {
   }
 }
 ```
-```css
-/* Sửa góc nền bị lòi ở header */
-header,
-.topbar,
-.header,
-header.wrap {
-  border-radius: 0 0 18px 18px;
-  overflow: hidden;
-}
 
-/* Giữ nội dung header nằm trên nền trang trí */
-header,
-.topbar,
-.header {
-  position: relative;
-  z-index: 2;
-}
-
-/* Nếu header có nền trong suốt, dùng nền đồng nhất */
-header,
-.topbar,
-.header {
-  background-color: #eff7ff;
-}
-```
