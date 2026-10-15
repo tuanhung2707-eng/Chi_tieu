@@ -365,3 +365,45 @@
 #qGo.fx-pop { animation:softGlow 5s ease-in-out infinite, qgoRim 3.4s ease-in-out infinite, qgoPop .42s cubic-bezier(.2,.8,.2,1); }
 @keyframes qgoPop { 0% { transform:scale(1); } 28% { transform:scale(.96); } 62% { transform:scale(1.035); } 100% { transform:scale(1); } }
 @media (prefers-reduced-motion:reduce) { .fx-layer { display:none; } }
+
+/* ===== Lịch chi tiêu: ô ngày pastel ombre + họa tiết dễ thương ===== */
+.day:not(.void) {
+  isolation:isolate;
+  border-color:rgba(199,222,242,.9);
+  background:linear-gradient(145deg,#fffdfd 0%,#f5f2ff 48%,#eaf7ff 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 3px 10px rgba(113,153,191,.055);
+}
+.day:not(.void)::before {
+  content:var(--cal-deco,"✿");
+  position:absolute; right:5px; bottom:4px;
+  z-index:-1; pointer-events:none; user-select:none;
+  font-size:clamp(27px,3.5vw,42px); line-height:1;
+  opacity:.22; transform:rotate(var(--deco-rot, -12deg));
+  filter:saturate(.72);
+  transition:transform .3s ease, opacity .3s ease;
+}
+.day:not(.void):nth-child(7n+1) { --cal-deco:"🌸"; --deco-rot:-13deg; background:linear-gradient(145deg,#fff8fb,#ffeef5 48%,#f2efff); }
+.day:not(.void):nth-child(7n+2) { --cal-deco:"💸"; --deco-rot:9deg; background:linear-gradient(145deg,#fbfff8,#eaf8ee 48%,#eaf7ff); }
+.day:not(.void):nth-child(7n+3) { --cal-deco:"🐱"; --deco-rot:-7deg; background:linear-gradient(145deg,#fffaf4,#fff0e6 48%,#f3efff); }
+.day:not(.void):nth-child(7n+4) { --cal-deco:"🍃"; --deco-rot:18deg; background:linear-gradient(145deg,#f8fff8,#e8f8ed 48%,#eaf7ff); }
+.day:not(.void):nth-child(7n+5) { --cal-deco:"🐶"; --deco-rot:7deg; background:linear-gradient(145deg,#fffaf5,#fff1e4 48%,#f1f3ff); }
+.day:not(.void):nth-child(7n+6) { --cal-deco:"✏️"; --deco-rot:-25deg; background:linear-gradient(145deg,#fffdf5,#fff5d9 48%,#f4efff); }
+.day:not(.void):nth-child(7n) { --cal-deco:"📏"; --deco-rot:12deg; background:linear-gradient(145deg,#f8fcff,#e8f4ff 48%,#f3edff); }
+.day:not(.void).past { filter:saturate(.82); }
+.day:not(.void).today {
+  background:linear-gradient(145deg,#fff9fd 0%,#e8f4ff 42%,#e5fff5 100%);
+  border:1.5px solid #8fcaf0;
+  box-shadow:inset 0 0 0 1px rgba(255,255,255,.75),0 5px 16px rgba(102,174,232,.16);
+}
+.day:not(.void).today::before { opacity:.34; font-size:clamp(32px,4vw,47px); }
+.day:not(.void):hover::before { opacity:.42; transform:rotate(0deg) scale(1.12); }
+.day:not(.void) .top2, .day:not(.void) .f, .day:not(.void) .c, .day:not(.void) .chk { position:relative; z-index:1; }
+.day:not(.void) .dn { text-shadow:0 1px 0 rgba(255,255,255,.65); }
+.day:not(.void).today .dn { text-shadow:none; }
+@media (max-width:680px) {
+  .day:not(.void)::before { right:1px; bottom:2px; font-size:25px; opacity:.19; }
+  .day:not(.void).today::before { font-size:28px; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .day:not(.void)::before { transition:none; }
+}
