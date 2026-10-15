@@ -212,7 +212,9 @@
 .bg { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
 .wrap { position:relative; z-index:1; }
 
-.bub { position:absolute; bottom:-40px; left:var(--x); width:var(--s); height:var(--s); border-radius:50%; opacity:0;
+.bub { position:absolute; bottom:-40px; left:var(--x); .bub {
+  width: calc(var(--s) * 1.5);
+  height: calc(var(--s) * 1.5); border-radius:50%; opacity:0;
        background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.2) 58%),rgba(139,201,243,.28);
        border:1px solid rgba(255,255,255,.75); box-shadow:0 2px 8px rgba(102,174,232,.12);
        animation:bubRise var(--d) linear var(--w) infinite; will-change:transform,opacity; }
