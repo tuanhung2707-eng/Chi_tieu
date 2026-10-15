@@ -40,15 +40,8 @@
   /* Top bar */
   .top {
     position:sticky; top:0; z-index:4; display:flex; align-items:center; justify-content:space-between; gap:12px;
-    padding:16px 0; margin:0 0 18px; background:transparent;
-    border-bottom:0;
-  }
-  /* Nền topbar phủ hết chiều ngang màn hình, không tạo góc vuông ở mép wrap */
-  .top::before {
-    content:""; position:absolute; z-index:-1; pointer-events:none;
-    top:0; bottom:0; left:50%; width:100vw; transform:translateX(-50%);
-    background:rgba(241,248,255,.92);
-    -webkit-backdrop-filter:blur(16px); backdrop-filter:blur(16px);
+    padding:16px 0; margin:0 0 18px; background:rgba(241,248,255,.86);
+    backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
     border-bottom:1px solid rgba(220,234,246,.75);
   }
   .top h1 { font-size:21px; font-weight:800; letter-spacing:-.45px; margin:0; }
@@ -232,234 +225,9 @@
     .lh .seg button { padding:7px 6px; }
     .row { grid-template-columns:27px minmax(0,1fr) auto; gap:7px; }
   }
-  @media (prefers-reduced-motion: reduce) {
-    *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
-  }
-
-
-  /* ---------- Chi tiết trang trí & hoạt ảnh nhẹ ---------- */
-  .top h1 {
-    display:inline-flex;
-    align-items:center;
-    gap:7px;
-  }
-  .top h1::after {
-    content:"✦";
-    display:inline-block;
-    color:#79bce9;
-    font-size:.78em;
-    transform-origin:center;
-    animation:sparkleTurn 4.5s ease-in-out infinite;
-    text-shadow:0 2px 8px rgba(102,174,232,.28);
-  }
-  .hero {
-    background-image:
-      radial-gradient(circle at 12% 22%, rgba(255,255,255,.18) 0 2px, transparent 3px),
-      radial-gradient(circle at 27% 76%, rgba(255,255,255,.15) 0 1.5px, transparent 2.5px),
-      radial-gradient(circle at 76% 33%, rgba(255,255,255,.2) 0 2px, transparent 3px),
-      linear-gradient(135deg,#77b9ed 0%,#8dcdf1 55%,#b3e1f9 100%);
-  }
-  .hero:before {
-    animation:floatDecor 8s ease-in-out infinite;
-    box-shadow:0 0 0 16px rgba(255,255,255,.035), 0 0 0 34px rgba(255,255,255,.025);
-  }
-  .hero:after {
-    animation:floatDecor 7s ease-in-out infinite reverse;
-    box-shadow:0 0 0 12px rgba(255,255,255,.035);
-  }
-  .hero .lbl::before {
-    content:"✧";
-    display:inline-block;
-    margin-right:7px;
-    font-size:1.15em;
-    animation:sparklePulse 2.8s ease-in-out infinite;
-  }
-  .hero .big {
-    animation:numberAppear .48s cubic-bezier(.2,.8,.2,1) backwards;
-  }
-  .stat {
-    animation:fadeLift .55s cubic-bezier(.2,.8,.2,1) backwards;
-  }
-  .stat:nth-child(2) { animation-delay:.07s; }
-  .stat:nth-child(3) { animation-delay:.14s; }
-  #quick {
-    animation:fadeLift .55s .08s cubic-bezier(.2,.8,.2,1) backwards;
-  }
-  .card h2 {
-    text-decoration:underline;
-    text-decoration-color:#e2f1fc;
-    text-decoration-thickness:3px;
-    text-underline-offset:5px;
-  }
-  .btn, .chip, .ibtn, .seg button {
-    position:relative;
-    overflow:hidden;
-  }
-  .btn::after, .chip::after, .ibtn::after {
-    content:"";
-    position:absolute;
-    top:-60%;
-    left:-75%;
-    width:42%;
-    height:220%;
-    transform:rotate(22deg);
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.58),transparent);
-    opacity:0;
-    pointer-events:none;
-  }
-  .btn:hover::after, .chip:hover::after, .ibtn:hover::after {
-    opacity:1;
-    animation:shineSweep .65s ease-out;
-  }
-  .btn.primary {
-    background-size:180% 180%;
-    animation:softGlow 5s ease-in-out infinite;
-  }
-
-  /* Hiệu ứng pháo hoa sao trắng quanh nút thêm chi tiêu */
-  #qGo { position:relative; overflow:hidden; border-radius:inherit; }
-  #qGo.added-pop { animation: starButtonImpact .62s cubic-bezier(.18,.8,.25,1.3), softGlow 5s ease-in-out infinite; }
-  @keyframes starButtonImpact {
-    0% { transform:scale(1); filter:brightness(1); }
-    22% { transform:scale(1.13); filter:brightness(1.55); }
-    48% { transform:scale(.96); filter:brightness(1.3); }
-    72% { transform:scale(1.045); filter:brightness(1.18); }
-    100% { transform:scale(1); filter:brightness(1); }
-  }
-  .q-star-burst { position:fixed; z-index:10000; left:0; top:0; width:0; height:0; pointer-events:none; color:#fff; }
-  .q-star-big {
-    position:absolute; left:0; top:0; color:#fff; font-family:Arial,sans-serif; font-size:var(--size,42px);
-    line-height:1; font-weight:900; opacity:0; white-space:nowrap;
-    text-shadow:0 0 4px #fff,0 0 12px rgba(255,255,255,.98),0 0 24px rgba(255,255,255,.82),0 0 38px rgba(205,231,255,.65);
-    transform:translate(-50%,-50%) scale(.05) rotate(-35deg);
-    animation:qBigStarBlast 1.05s cubic-bezier(.12,.7,.18,1) forwards;
-  }
-  @keyframes qBigStarBlast {
-    0% { opacity:0; transform:translate(-50%,-50%) scale(.05) rotate(-35deg); }
-    12% { opacity:1; transform:translate(-50%,-50%) scale(1.28) rotate(12deg); }
-    27% { opacity:1; transform:translate(calc(-50% + var(--dx)*.42),calc(-50% + var(--dy)*.42)) scale(1) rotate(0deg); }
-    72% { opacity:.98; transform:translate(calc(-50% + var(--dx)*.88),calc(-50% + var(--dy)*.88)) scale(.92) rotate(24deg); }
-    100% { opacity:0; transform:translate(calc(-50% + var(--dx)),calc(-50% + var(--dy))) scale(.2) rotate(48deg); }
-  }
-  .q-star-trail {
-    position:absolute; left:0; top:0; color:#fff; font-family:Arial,sans-serif; font-size:var(--tiny-size,13px);
-    line-height:1; opacity:0; text-shadow:0 0 3px #fff,0 0 9px rgba(255,255,255,.95);
-    transform:translate(-50%,-50%) scale(.1); animation:qTinyStarFollow .82s ease-out forwards;
-  }
-  @keyframes qTinyStarFollow {
-    0% { opacity:0; transform:translate(-50%,-50%) scale(.1) rotate(0deg); }
-    18% { opacity:1; transform:translate(calc(-50% + var(--tx)*.15),calc(-50% + var(--ty)*.15)) scale(1.15) rotate(35deg); }
-    65% { opacity:.9; transform:translate(calc(-50% + var(--tx)*.7),calc(-50% + var(--ty)*.7)) scale(.8) rotate(95deg); }
-    100% { opacity:0; transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) scale(.05) rotate(150deg); }
-  }
-  @media (prefers-reduced-motion: reduce) { .q-star-burst,.q-star-big,.q-star-trail { display:none !important; } }
-
-  /* Khóa toàn bộ hiệu ứng bên trong đúng đường bo của nút */
-  #qGo {
-    position:relative !important;
-    overflow:hidden !important;
-    border-radius:14px !important;
-    isolation:isolate;
-    clip-path: inset(0 round 14px);
-    text-shadow:0 1px 2px rgba(37,105,157,.16);
-  }
-  /* Tắt lớp sóng cũ vốn tràn khỏi nút */
-  #qGo::before { content:none !important; animation:none !important; }
-  /* Ánh sáng hover được cắt theo bo góc, không văng ra ngoài */
-  #qGo::after { border-radius:14px; }
-  #qGo:hover::after { border-radius:14px; }
-  @keyframes sparkleTurn {
-    0%,75%,100% { transform:rotate(0) scale(1); opacity:.85; }
-    82% { transform:rotate(22deg) scale(1.22); opacity:1; }
-    90% { transform:rotate(-12deg) scale(1.08); }
-  }
-  @keyframes sparklePulse {
-    0%,100% { opacity:.72; transform:scale(1); }
-    50% { opacity:1; transform:scale(1.18); }
-  }
-  @keyframes floatDecor {
-    0%,100% { transform:translate3d(0,0,0); }
-    50% { transform:translate3d(-9px,8px,0); }
-  }
-  @keyframes fadeLift {
-    from { opacity:0; transform:translateY(9px); }
-    to { opacity:1; transform:translateY(0); }
-  }
-  @keyframes numberAppear {
-    from { opacity:.35; transform:translateY(5px) scale(.985); }
-    to { opacity:1; transform:translateY(0) scale(1); }
-  }
-  @keyframes shineSweep {
-    0% { left:-75%; }
-    100% { left:140%; }
-  }
-  @keyframes softGlow {
-    0%,100% { background-position:0% 50%; }
-    50% { background-position:100% 50%; }
-  }
-  @keyframes checkPop {
-    0% { transform:scale(.82); }
-    70% { transform:scale(1.12); }
-    100% { transform:scale(1); }
-  }
-  @keyframes toastEnter {
-    from { opacity:0; filter:blur(2px); }
-    to { opacity:1; filter:blur(0); }
-  }
-  @media (max-width:600px) {
-    .hero:before { width:155px; height:155px; }
-    .hero:after { width:105px; height:105px; }
-  }
-
-  /* ---------- Hoạt ảnh nhẹ bổ sung ---------- */
-  .list.enter .row { animation:fadeLift .42s cubic-bezier(.2,.8,.2,1) backwards; }
-  .list.enter .row:nth-child(2) { animation-delay:.03s; } .list.enter .row:nth-child(3) { animation-delay:.06s; }
-  .list.enter .row:nth-child(4) { animation-delay:.09s; } .list.enter .row:nth-child(5) { animation-delay:.12s; }
-  .list.enter .row:nth-child(6) { animation-delay:.15s; } .list.enter .row:nth-child(7) { animation-delay:.18s; }
-  .list.enter .row:nth-child(8) { animation-delay:.21s; } .list.enter .row:nth-child(9) { animation-delay:.24s; }
-  .list.enter .row:nth-child(10) { animation-delay:.27s; } .list.enter .row:nth-child(n+11) { animation-delay:.3s; }
-  .row.today { animation:todayGlow 3.4s ease-in-out infinite; }
-  .row.flash { animation:rowFlash 1.1s ease-out; }
-  .bar > i { position:relative; overflow:hidden; }
-  .bar > i::after { content:""; position:absolute; inset:0; transform:translateX(-100%);
-    background:linear-gradient(90deg,transparent,rgba(102,174,232,.38),transparent); animation:barShine 2.8s ease-in-out infinite; }
-  .hero.nudge { animation:nudge .55s ease-in-out; }
-  .chips .chip { animation:popIn .34s cubic-bezier(.2,.9,.3,1.2) backwards; }
-  .chips .chip:nth-child(2) { animation-delay:.03s; } .chips .chip:nth-child(3) { animation-delay:.06s; }
-  .chips .chip:nth-child(4) { animation-delay:.09s; } .chips .chip:nth-child(5) { animation-delay:.12s; }
-  .chips .chip:nth-child(6) { animation-delay:.15s; } .chips .chip:nth-child(7) { animation-delay:.18s; }
-  .chips .chip:nth-child(n+8) { animation-delay:.21s; }
-  .modal.on .sheet > * { animation:fadeLift .38s cubic-bezier(.2,.8,.2,1) backwards; }
-  .modal.on .sheet > :nth-child(2) { animation-delay:.04s; } .modal.on .sheet > :nth-child(3) { animation-delay:.07s; }
-  .modal.on .sheet > :nth-child(4) { animation-delay:.10s; } .modal.on .sheet > :nth-child(5) { animation-delay:.13s; }
-  .modal.on .sheet > :nth-child(6) { animation-delay:.16s; } .modal.on .sheet > :nth-child(7) { animation-delay:.19s; }
-  .modal.on .sheet > :nth-child(n+8) { animation-delay:.22s; }
-  #btnSettings:hover { transform:rotate(60deg); }
-  .floaty { position:fixed; z-index:30; pointer-events:none; font-weight:800; font-size:14px; color:var(--accent-deep);
-    background:#fff; padding:4px 11px; border-radius:99px; box-shadow:0 6px 16px rgba(71,128,171,.18);
-    animation:floatUp .95s cubic-bezier(.2,.8,.2,1) forwards; }
-  @keyframes todayGlow {
-    0%,100% { box-shadow:0 0 0 1px rgba(130,196,236,.12), 0 0 0 0 rgba(102,174,232,0); }
-    50% { box-shadow:0 0 0 1px rgba(130,196,236,.22), 0 0 0 6px rgba(102,174,232,.13); }
-  }
-  @keyframes rowFlash {
-    0% { transform:scale(1.015); box-shadow:0 0 0 0 rgba(102,174,232,.55); }
-    100% { transform:none; box-shadow:0 0 0 16px rgba(102,174,232,0); }
-  }
-  @keyframes barShine { 0% { transform:translateX(-100%); } 60%,100% { transform:translateX(100%); } }
-  @keyframes nudge { 0%,100% { transform:none; } 25% { transform:translateX(-5px); } 55% { transform:translateX(5px); } 80% { transform:translateX(-2px); } }
-  @keyframes popIn { from { opacity:0; transform:scale(.85); } to { opacity:1; transform:none; } }
-  @keyframes slideDown { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:none; } }
-  @keyframes floatUp {
-    0% { opacity:0; transform:translate(-50%,6px) scale(.9); }
-    20% { opacity:1; }
-    100% { opacity:0; transform:translate(-50%,-48px) scale(1.04); }
-  }
-
   /* ---------- Thông báo kỳ mới & công tắc tự động chuyển kỳ ---------- */
   .banner { background:linear-gradient(100deg,#eaf6ff,#f7fbff); border:1px solid #a9d7f5; border-radius:20px; padding:14px 16px;
-    margin-bottom:16px; font-size:13.5px; line-height:1.5; box-shadow:var(--shadow);
-    animation:slideDown .5s cubic-bezier(.2,.8,.2,1) backwards; }
+    margin-bottom:16px; font-size:13.5px; line-height:1.5; box-shadow:var(--shadow); }
   .banner b { display:block; margin-bottom:3px; font-size:14px; }
   .banner .twin { margin-top:10px; } .banner .btn { padding:10px 13px; }
   .divider { height:1px; background:var(--line); margin:18px 0 4px; }
@@ -471,35 +239,6 @@
     transition:transform .22s cubic-bezier(.2,.8,.2,1); box-shadow:0 2px 5px rgba(40,80,110,.25); }
   .switch input:checked + i { background:var(--ok); } .switch input:checked + i::after { transform:translateX(18px); }
   #aBox { transition:opacity .2s; }
-
-  /* ---------- Hoạt ảnh nền ---------- */
-  .bg { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
-  .wrap { position:relative; z-index:1; }
-  .blob { position:absolute; border-radius:50%; will-change:transform;
-          background:radial-gradient(circle,rgba(139,201,243,.55),rgba(139,201,243,0) 68%); }
-  .b1 { width:540px; height:540px; left:-150px; top:-130px; animation:drift1 26s ease-in-out infinite; }
-  .b2 { width:480px; height:480px; right:-170px; top:30%; animation:drift2 33s ease-in-out infinite;
-        background:radial-gradient(circle,rgba(196,228,252,.7),rgba(196,228,252,0) 68%); }
-  .b3 { width:440px; height:440px; left:18%; bottom:-190px; animation:drift3 29s ease-in-out infinite;
-        background:radial-gradient(circle,rgba(168,228,222,.42),rgba(168,228,222,0) 68%); }
-  .bub { position:absolute; bottom:-40px; left:var(--x); width:var(--s); height:var(--s); border-radius:50%; opacity:0;
-         background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.2) 58%),rgba(139,201,243,.28);
-         border:1px solid rgba(255,255,255,.75); box-shadow:0 2px 8px rgba(102,174,232,.12);
-         animation:bubRise var(--d) linear var(--w) infinite; will-change:transform,opacity; }
-  @keyframes drift1 { 0%,100% { transform:translate3d(0,0,0) scale(1); } 50% { transform:translate3d(90px,70px,0) scale(1.12); } }
-  @keyframes drift2 { 0%,100% { transform:translate3d(0,0,0) scale(1); } 50% { transform:translate3d(-100px,-60px,0) scale(1.1); } }
-  @keyframes drift3 { 0%,100% { transform:translate3d(0,0,0) scale(1); } 50% { transform:translate3d(80px,-50px,0) scale(1.15); } }
-  @keyframes bubRise {
-    0%   { transform:translate3d(0,0,0); opacity:0; }
-    10%  { opacity:.75; }
-    35%  { transform:translate3d(16px,-38vh,0); }
-    65%  { transform:translate3d(-12px,-74vh,0); opacity:.6; }
-    100% { transform:translate3d(10px,-112vh,0); opacity:0; }
-  }
-  @media (max-width:600px) {
-    .b1 { width:340px; height:340px; } .b2 { width:300px; height:300px; } .b3 { width:300px; height:300px; }
-    .bub:nth-child(n+9) { display:none; }
-  }
 
   /* ---------- Bảng tuần (mỗi hàng là một tuần) ---------- */
   .dow, .wkg { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:6px; }
@@ -513,34 +252,13 @@
   .wkh { display:flex; align-items:baseline; justify-content:space-between; gap:8px; padding:0 4px 8px; font-size:12px; color:var(--muted); }
   .wkh b { color:var(--text); font-weight:800; }
   .wkh .wl { font-weight:750; color:var(--accent-deep); }
-  .day { position:relative; isolation:isolate; min-width:0; min-height:108px; padding:8px 8px 11px; border-radius:14px;
-         background-color:#fff;
-         background-image:radial-gradient(ellipse at 100% 100%, rgba(139,201,243,.16) 0%, transparent 52%),
-                          radial-gradient(ellipse at 0% 0%, rgba(178,218,192,.13) 0%, transparent 48%);
+  .day { position:relative; min-width:0; min-height:108px; padding:8px 8px 11px; border-radius:14px; background:#fff;
          border:1px solid #e3effa; cursor:pointer; display:flex; flex-direction:column; gap:3px; overflow:hidden;
-         transition:transform .18s, box-shadow .18s, border-color .18s, background-color .18s, opacity .25s; }
-  /* Họa tiết chìm đơn sắc phủ nền ô ngày: hoa, lá, thú cưng và đồ dùng */
-  .day::before {
-    content:"✿";
-    position:absolute; z-index:-1; pointer-events:none;
-    right:5px; bottom:-10px;
-    font-family:ui-rounded,system-ui,sans-serif;
-    font-size:48px; line-height:1;
-    font-weight:400;
-    color:rgba(92,145,177,.15);
-    transform:rotate(-12deg);
-  }
-  .day:nth-child(6n+2)::before { content:"❧"; color:rgba(94,151,119,.17); font-size:54px; right:1px; bottom:-12px; transform:rotate(12deg); }
-  .day:nth-child(6n+3)::before { content:"₫"; color:rgba(91,143,185,.13); font-size:45px; right:8px; bottom:-7px; transform:rotate(-8deg); }
-  .day:nth-child(6n+4)::before { content:"ᓚᘏᗢ"; color:rgba(137,116,158,.16); font-size:26px; right:2px; bottom:3px; transform:rotate(-5deg); }
-  .day:nth-child(6n+5)::before { content:"૮ ˶ᵔ ﻌ ᵔ˶ ა"; color:rgba(174,128,137,.16); font-size:22px; right:-2px; bottom:5px; transform:rotate(4deg); }
-  .day:nth-child(6n)::before { content:"✎  ╱"; color:rgba(172,145,91,.17); font-size:35px; right:3px; bottom:-4px; transform:rotate(-25deg); }
-  .day:nth-child(3n+2) { background-image:linear-gradient(135deg,rgba(205,183,219,.17),rgba(255,255,255,.3) 72%); }
-  .day:nth-child(3n) { background-image:linear-gradient(135deg,rgba(238,194,202,.18),rgba(255,255,255,.28) 72%); }
+         transition:transform .18s, box-shadow .18s, border-color .18s, background .18s, opacity .25s; }
   .day:hover { transform:translateY(-2px); box-shadow:var(--shadow-hover); border-color:#c8e3f7; }
   .day:active { transform:scale(.98); }
-  .day.past { background-color:#f3f7fb; filter:saturate(.72); }
-  .day.today { background-color:#f2faff; background-image:linear-gradient(160deg,rgba(230,244,255,.88),rgba(249,252,255,.88)), radial-gradient(ellipse at 100% 100%,rgba(102,174,232,.16),transparent 58%); border-color:#8fcaf0; animation:todayGlow 3.4s ease-in-out infinite; }
+  .day.past { background:#f3f7fb; }
+  .day.today { background:linear-gradient(160deg,#e6f4ff,#f9fcff); border-color:#8fcaf0; }
   .day.void { background:transparent; border:1px dashed #e0edf7; box-shadow:none; pointer-events:none; }
   .day.dim { opacity:.3; }
   .day::after { content:""; position:absolute; left:8px; right:8px; bottom:0; height:3px; border-radius:3px 3px 0 0; background:transparent; transition:background .3s; }
@@ -557,8 +275,6 @@
           -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; word-break:break-word; }
   .f.nt::before { content:"✎ "; opacity:.55; }
   .c { display:none; }
-  .cal.enter .day { animation:fadeLift .42s cubic-bezier(.2,.8,.2,1) backwards; animation-delay:calc(var(--i,0) * 14ms); }
-  .day.flash { animation:rowFlash 1.1s ease-out; }
   @media (max-width:680px) {
     .dow { padding:0 8px 6px; gap:4px; } .wkg { gap:4px; }
     .dow span { font-size:11px; }
@@ -572,7 +288,7 @@
     .dn { font-size:13px; min-width:22px; height:22px; }
     .day .chk { position:absolute; top:3px; right:3px; width:13px; height:13px; pointer-events:none; }
     .day .chk span { inset:0; font-size:8px; border-width:1.5px; }
-    .f { display:none; }
+    .f, .f.nt { display:none; }
     .c { display:block; }
     .c.sp { font-size:11.5px; font-weight:800; line-height:1.2; font-variant-numeric:tabular-nums; }
     .c.df { font-size:10px; font-weight:700; line-height:1.2; }
@@ -598,39 +314,11 @@
   .toast button { margin-left:12px; border:0; background:rgba(255,255,255,.22); color:#fff; padding:4px 11px; border-radius:99px; font-weight:700; }
   select.psel option { color:#20364d; }
 
-  /* Cảnh đồng cỏ đơn sắc trong thẻ ngân sách; tự chạy, không cần tương tác */
-  .hero { --scene-ink:rgba(38,104,143,.72); }
-  .hero-scene { position:absolute; inset:0; z-index:0; overflow:hidden; pointer-events:none; color:var(--scene-ink); }
-  .hero > :not(.hero-scene) { position:relative; z-index:1; }
-  .landscape { position:absolute; right:-3px; bottom:0; width:min(59%,440px); height:100%; overflow:visible; }
-  .tree { transform-origin:346px 177px; animation:treeSway 6.8s ease-in-out infinite; }
-  .canopy { transform-origin:350px 75px; animation:canopySway 5.6s ease-in-out infinite; }
-  .cloud-one { animation:cloudDrift 19s ease-in-out infinite alternate; }
-  .cloud-two { animation:cloudDrift 24s ease-in-out infinite alternate-reverse; }
-  .falling-leaves { display:none; }
-  .hero.over { --scene-ink:rgba(139,62,76,.78); }
-  .hero.over .canopy { opacity:.58; }
-  .hero.over .tree-leaves { opacity:.38; }
-  .hero.over .falling-leaves { display:block; }
-  .hero.over .leaf-a { animation:leafFallA 7.8s ease-in infinite; }
-  .hero.over .leaf-b { animation:leafFallB 9.4s 1.5s ease-in infinite; }
-  .hero.over .leaf-c { animation:leafFallC 8.6s 3s ease-in infinite; }
-  .hero.over .leaf-d { animation:leafFallD 10s 4.4s ease-in infinite; }
-  .hero.over .cloud { opacity:.23; }
-  .fall { transform-box:fill-box; transform-origin:center; }
-  @keyframes treeSway { 0%,100% { transform:rotate(-1deg); } 50% { transform:rotate(1.2deg); } }
-  @keyframes canopySway { 0%,100% { transform:rotate(-1.4deg) translateX(-1px); } 50% { transform:rotate(1.7deg) translateX(2px); } }
-  @keyframes cloudDrift { from { transform:translateX(-7px); } to { transform:translateX(8px); } }
-  @keyframes leafFallA { 0% { transform:translate(330px,66px) rotate(0); opacity:0; } 12% { opacity:.8; } 75% { opacity:.75; } 100% { transform:translate(304px,176px) rotate(240deg); opacity:0; } }
-  @keyframes leafFallB { 0% { transform:translate(366px,58px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(389px,176px) rotate(-220deg); opacity:0; } }
-  @keyframes leafFallC { 0% { transform:translate(347px,75px) rotate(0); opacity:0; } 12% { opacity:.75; } 100% { transform:translate(340px,180px) rotate(280deg); opacity:0; } }
-  @keyframes leafFallD { 0% { transform:translate(385px,83px) rotate(0); opacity:0; } 12% { opacity:.8; } 100% { transform:translate(411px,177px) rotate(-260deg); opacity:0; } }
-  @media (max-width:600px) { .landscape { width:58%; opacity:.8; } .hero { padding-right:18px; } }
-  @media (prefers-reduced-motion:reduce) {
-    .tree,.canopy,.cloud-one,.cloud-two,.hero.over .fall { animation:none !important; }
-  }
+  /* Thẻ ngân sách và ô thêm khoản chi nằm cạnh nhau: dồn khoảng trống xuống dưới 3 ô tổng quan */
+  @media (min-width:760px) { #app { grid-template-rows:auto 1fr; } }
 
 </style>
+<link rel="stylesheet" href="animations.css?v=1">
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="bub" style="--x:6%;--s:16px;--d:17s;--w:-0s"></i><i class="bub" style="--x:15%;--s:10px;--d:23s;--w:-5s"></i><i class="bub" style="--x:26%;--s:22px;--d:19s;--w:-9s"></i><i class="bub" style="--x:38%;--s:12px;--d:26s;--w:-2s"></i><i class="bub" style="--x:50%;--s:18px;--d:21s;--w:-12s"></i><i class="bub" style="--x:62%;--s:9px;--d:24s;--w:-7s"></i><i class="bub" style="--x:73%;--s:20px;--d:18s;--w:-3s"></i><i class="bub" style="--x:84%;--s:13px;--d:27s;--w:-10s"></i><i class="bub" style="--x:92%;--s:24px;--d:20s;--w:-14s"></i><i class="bub" style="--x:45%;--s:8px;--d:29s;--w:-16s"></i></div>
@@ -687,47 +375,76 @@
   <main id="app" class="hidden">
     <section class="hero" id="hero">
       <div class="hero-scene" aria-hidden="true">
-        <svg class="landscape" viewBox="0 0 440 190" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <g class="cloud cloud-one" fill="currentColor" opacity=".48">
-            <ellipse cx="270" cy="24" rx="19" ry="7"/><circle cx="261" cy="20" r="7"/><circle cx="274" cy="17" r="10"/><circle cx="285" cy="22" r="6"/>
+        <svg class="landscape" viewBox="0 0 440 210" preserveAspectRatio="xMaxYMax meet" xmlns="http://www.w3.org/2000/svg">
+          <g class="clouds" fill="currentColor">
+            <g class="cloud cloud-one"><g transform="translate(206 44) scale(1.0)"><ellipse cx="0" cy="0" rx="19" ry="6"/><circle cx="-10" cy="-4" r="6.5"/><circle cx="0" cy="-9" r="9.5"/><circle cx="11" cy="-3.5" r="6.5"/></g></g>
+            <g class="cloud cloud-two"><g transform="translate(272 22) scale(0.8)"><ellipse cx="0" cy="0" rx="19" ry="6"/><circle cx="-10" cy="-4" r="6.5"/><circle cx="0" cy="-9" r="9.5"/><circle cx="11" cy="-3.5" r="6.5"/></g></g>
+            <g class="cloud cloud-three"><g transform="translate(160 68) scale(0.62)"><ellipse cx="0" cy="0" rx="19" ry="6"/><circle cx="-10" cy="-4" r="6.5"/><circle cx="0" cy="-9" r="9.5"/><circle cx="11" cy="-3.5" r="6.5"/></g></g>
           </g>
-          <g class="cloud cloud-two" fill="currentColor" opacity=".35">
-            <ellipse cx="350" cy="45" rx="16" ry="5.5"/><circle cx="343" cy="42" r="6"/><circle cx="354" cy="40" r="8"/><circle cx="363" cy="44" r="5"/>
+          <path d="M-420 170 Q-330 150 -240 168 T-60 166 Q0 150 60 156 Q100 162 130 170 T270 164 T440 152 V210 H-420Z" fill="currentColor" opacity=".14"/>
+          <path d="M-420 186 Q-330 178 -240 188 T-60 184 Q0 180 90 176 Q135 180 180 187 T360 183 T440 180 V210 H-420Z" fill="currentColor" opacity=".28"/>
+          <g class="tufts" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" fill="none" opacity=".55">
+            <path class="tuft t0" d="M-400 192 q-2.3 -6.8 -5.7 -10.2 M-400 192 q1.1 -9.1 1.1 -13.7 M-400 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t1" d="M-374 192 q-1.6 -4.8 -4.0 -7.2 M-374 192 q0.8 -6.4 0.8 -9.6 M-374 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t2" d="M-348 192 q-2.1 -6.2 -5.1 -9.2 M-348 192 q1.0 -8.2 1.0 -12.3 M-348 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t0" d="M-322 192 q-2.5 -7.5 -6.2 -11.2 M-322 192 q1.2 -10.0 1.2 -15.0 M-322 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t1" d="M-296 192 q-1.8 -5.5 -4.6 -8.2 M-296 192 q0.9 -7.3 0.9 -11.0 M-296 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t2" d="M-270 192 q-2.3 -6.8 -5.7 -10.2 M-270 192 q1.1 -9.1 1.1 -13.7 M-270 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t0" d="M-244 192 q-1.6 -4.8 -4.0 -7.2 M-244 192 q0.8 -6.4 0.8 -9.6 M-244 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t1" d="M-218 192 q-2.1 -6.2 -5.1 -9.2 M-218 192 q1.0 -8.2 1.0 -12.3 M-218 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t2" d="M-192 192 q-2.5 -7.5 -6.2 -11.2 M-192 192 q1.2 -10.0 1.2 -15.0 M-192 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t0" d="M-166 192 q-1.8 -5.5 -4.6 -8.2 M-166 192 q0.9 -7.3 0.9 -11.0 M-166 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t1" d="M-140 192 q-2.3 -6.8 -5.7 -10.2 M-140 192 q1.1 -9.1 1.1 -13.7 M-140 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t2" d="M-114 192 q-1.6 -4.8 -4.0 -7.2 M-114 192 q0.8 -6.4 0.8 -9.6 M-114 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t0" d="M-88 192 q-2.1 -6.2 -5.1 -9.2 M-88 192 q1.0 -8.2 1.0 -12.3 M-88 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t1" d="M-62 192 q-2.5 -7.5 -6.2 -11.2 M-62 192 q1.2 -10.0 1.2 -15.0 M-62 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t2" d="M-36 192 q-1.8 -5.5 -4.6 -8.2 M-36 192 q0.9 -7.3 0.9 -11.0 M-36 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t0" d="M-10 192 q-2.3 -6.8 -5.7 -10.2 M-10 192 q1.1 -9.1 1.1 -13.7 M-10 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t0" d="M12 192 q-1.6 -4.8 -4.0 -7.2 M12 192 q0.8 -6.4 0.8 -9.6 M12 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t1" d="M38 192 q-2.1 -6.2 -5.1 -9.2 M38 192 q1.0 -8.2 1.0 -12.3 M38 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t2" d="M64 192 q-2.5 -7.5 -6.2 -11.2 M64 192 q1.2 -10.0 1.2 -15.0 M64 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t0" d="M90 192 q-1.8 -5.5 -4.6 -8.2 M90 192 q0.9 -7.3 0.9 -11.0 M90 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t1" d="M116 192 q-2.3 -6.8 -5.7 -10.2 M116 192 q1.1 -9.1 1.1 -13.7 M116 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t2" d="M142 192 q-1.6 -4.8 -4.0 -7.2 M142 192 q0.8 -6.4 0.8 -9.6 M142 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t0" d="M168 192 q-2.1 -6.2 -5.1 -9.2 M168 192 q1.0 -8.2 1.0 -12.3 M168 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t1" d="M194 192 q-2.5 -7.5 -6.2 -11.2 M194 192 q1.2 -10.0 1.2 -15.0 M194 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t2" d="M220 192 q-1.8 -5.5 -4.6 -8.2 M220 192 q0.9 -7.3 0.9 -11.0 M220 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t0" d="M246 192 q-2.3 -6.8 -5.7 -10.2 M246 192 q1.1 -9.1 1.1 -13.7 M246 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t1" d="M272 192 q-1.6 -4.8 -4.0 -7.2 M272 192 q0.8 -6.4 0.8 -9.6 M272 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t2" d="M298 192 q-2.1 -6.2 -5.1 -9.2 M298 192 q1.0 -8.2 1.0 -12.3 M298 192 q3.1 -5.1 6.2 -8.2"/>
+            <path class="tuft t0" d="M324 192 q-2.5 -7.5 -6.2 -11.2 M324 192 q1.2 -10.0 1.2 -15.0 M324 192 q3.8 -6.2 7.5 -10.0"/>
+            <path class="tuft t1" d="M350 192 q-1.8 -5.5 -4.6 -8.2 M350 192 q0.9 -7.3 0.9 -11.0 M350 192 q2.7 -4.6 5.5 -7.3"/>
+            <path class="tuft t2" d="M376 192 q-2.3 -6.8 -5.7 -10.2 M376 192 q1.1 -9.1 1.1 -13.7 M376 192 q3.4 -5.7 6.8 -9.1"/>
+            <path class="tuft t0" d="M402 192 q-1.6 -4.8 -4.0 -7.2 M402 192 q0.8 -6.4 0.8 -9.6 M402 192 q2.4 -4.0 4.8 -6.4"/>
+            <path class="tuft t1" d="M428 192 q-2.1 -6.2 -5.1 -9.2 M428 192 q1.0 -8.2 1.0 -12.3 M428 192 q3.1 -5.1 6.2 -8.2"/>
           </g>
-          <path class="distant-hill" d="M0 164 Q55 133 108 157 T220 151 T330 151 T440 145 V190 H0Z" fill="currentColor" opacity=".12"/>
-         <path class="grass"
-  d="M0 172
-     Q55 158 110 172
-     T220 172
-     T330 172
-     T440 172
-     V190 H0Z"
-  fill="currentColor"
-  opacity=".38"/>
-          <g class="tree" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M346 177 Q350 146 345 116 Q340 94 325 77 M346 132 Q366 108 377 83 M344 108 Q326 91 322 66 M356 151 Q379 140 393 120" fill="none" stroke-width="7" opacity=".82"/>
-            <g class="canopy" fill="currentColor" stroke="none">
-              <circle cx="323" cy="61" r="22"/><circle cx="344" cy="47" r="27"/><circle cx="367" cy="61" r="24"/>
-              <circle cx="388" cy="80" r="19"/><circle cx="351" cy="78" r="26"/><circle cx="314" cy="84" r="18"/>
-              <circle cx="379" cy="43" r="16"/>
+          <g class="flowers" fill="currentColor" opacity=".55">
+            <path d="M58 192V183M152 194V185M412 192V183" stroke="currentColor" stroke-width="1.3" fill="none"/>
+            <circle cx="58" cy="181" r="2.4"/><circle cx="152" cy="183" r="2.4"/><circle cx="412" cy="181" r="2.4"/>
+          </g>
+          <path d="M-420 202 Q-300 196 -180 201 T60 199 Q140 195 220 201 T440 198 V210 H-420Z" fill="currentColor" opacity=".40"/>
+          <g class="tree" fill="currentColor" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M343 196 C347 170 346 143 342 116 L357 116 C356 143 360 172 367 196 Z" stroke="none" opacity=".88"/>
+            <g class="limbs" fill="none" opacity=".88">
+              <path d="M349 128 Q330 110 316 88 M352 122 Q374 104 388 80 M349 116 Q344 94 346 70 M356 152 Q378 142 394 124 M346 150 Q328 142 312 130" stroke-width="6"/>
+              <path d="M326 100 Q318 94 310 92 M322 94 Q320 84 322 76 M376 94 Q388 90 398 92 M382 86 Q392 74 392 66 M346 84 Q338 74 334 64 M347 80 Q356 70 362 62 M386 130 Q396 126 402 128 M318 134 Q308 132 302 136" stroke-width="3"/>
             </g>
-            <g class="tree-leaves" fill="currentColor" stroke="none">
-              <ellipse cx="315" cy="53" rx="5" ry="9" transform="rotate(-35 315 53)"/>
-              <ellipse cx="350" cy="27" rx="5" ry="9" transform="rotate(20 350 27)"/>
-              <ellipse cx="380" cy="60" rx="5" ry="9" transform="rotate(48 380 60)"/>
-              <ellipse cx="335" cy="83" rx="5" ry="9" transform="rotate(-20 335 83)"/>
-              <ellipse cx="390" cy="92" rx="5" ry="9" transform="rotate(35 390 92)"/>
+            <g class="crown" stroke="none">
+              <g class="canopy-full" opacity=".82"><circle cx="316" cy="82" r="20"/><circle cx="336" cy="60" r="25"/><circle cx="362" cy="56" r="24"/><circle cx="386" cy="74" r="19"/><circle cx="348" cy="82" r="26"/><circle cx="318" cy="108" r="15"/><circle cx="392" cy="100" r="16"/><circle cx="366" cy="98" r="21"/><circle cx="338" cy="104" r="17"/><circle cx="352" cy="40" r="16"/><circle cx="402" cy="118" r="11"/></g>
+              <g class="canopy-sparse" opacity=".82"><circle cx="312" cy="92" r="9"/><circle cx="322" cy="76" r="7"/><circle cx="392" cy="68" r="8"/><circle cx="399" cy="93" r="7"/><circle cx="334" cy="62" r="6"/><circle cx="363" cy="60" r="7"/><circle cx="403" cy="128" r="6"/><circle cx="382" cy="90" r="5"/><circle cx="341" cy="112" r="5"/><circle cx="316" cy="138" r="5"/></g>
             </g>
           </g>
-          <g class="falling-leaves" fill="currentColor">
-            <path class="fall leaf-a" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-b" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-c" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
-            <path class="fall leaf-d" d="M0 -6 Q8 -5 7 2 Q1 8 -4 3Z"/>
+          <g class="falling" fill="currentColor">
+            <g class="lf" style="--x0:318px;--y0:90px;--dx:-34px;--y1:194px;animation-duration:11.5s;animation-delay:-2.0s"><g class="lfi" style="animation-delay:-2.0s"><path transform="scale(1.0)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:336px;--y0:66px;--dx:-28px;--y1:192px;animation-duration:13.0s;animation-delay:-7.0s"><g class="lfi" style="animation-delay:-7.0s"><path transform="scale(1.2)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:362px;--y0:62px;--dx:18px;--y1:196px;animation-duration:12.0s;animation-delay:-4.5s"><g class="lfi" style="animation-delay:-4.5s"><path transform="scale(0.9)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:390px;--y0:82px;--dx:-40px;--y1:193px;animation-duration:14.0s;animation-delay:-10.0s"><g class="lfi" style="animation-delay:-10.0s"><path transform="scale(1.1)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:398px;--y0:100px;--dx:22px;--y1:197px;animation-duration:10.5s;animation-delay:-1.0s"><g class="lfi" style="animation-delay:-1.0s"><path transform="scale(0.9)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:346px;--y0:100px;--dx:-20px;--y1:195px;animation-duration:12.5s;animation-delay:-8.5s"><g class="lfi" style="animation-delay:-8.5s"><path transform="scale(1.0)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:380px;--y0:70px;--dx:30px;--y1:194px;animation-duration:15.0s;animation-delay:-12.0s"><g class="lfi" style="animation-delay:-12.0s"><path transform="scale(1.2)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
+            <g class="lf" style="--x0:322px;--y0:112px;--dx:-26px;--y1:196px;animation-duration:11.0s;animation-delay:-5.5s"><g class="lfi" style="animation-delay:-5.5s"><path transform="scale(0.85)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g></g>
           </g>
-          <g class="ground-leaves" fill="currentColor" opacity=".8">
-            <path d="M305 178q10 -10 17 0q-9 6 -17 0Z"/><path d="M366 181q10 -10 17 0q-9 6 -17 0Z"/>
-          </g>
+          <g class="ground-leaves" fill="currentColor" opacity=".72"><path transform="translate(316 196) rotate(-25) scale(1.0)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(334 199) rotate(35) scale(0.9)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(372 197) rotate(-40) scale(1.1)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(388 200) rotate(18) scale(0.9)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(300 199) rotate(55) scale(0.8)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(405 196) rotate(-12) scale(1.0)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/><path transform="translate(352 201) rotate(70) scale(0.8)" d="M0 -7 Q8 -5 7 2 Q2 8 -4 4 Q-7 -2 0 -7Z"/></g>
         </svg>
       </div>
       <div class="lbl" id="hLbl">Hôm nay còn được tiêu</div>
@@ -1176,60 +893,12 @@ async function silentReload() {
   try { await loadAll(); refresh(); setStatus('ok'); } catch (e) { setStatus('error'); }
 }
 
-function celebrateQuickAdd() {
-  const btn = $('qGo');
-  if (!btn || REDUCE) return;
-  btn.classList.remove('added-pop');
-  void btn.offsetWidth;
-  btn.classList.add('added-pop');
-  setTimeout(() => btn.classList.remove('added-pop'), 680);
-
-  const r = btn.getBoundingClientRect();
-  const cx = r.left + r.width / 2;
-  const cy = r.top + r.height / 2;
-  const layer = document.createElement('span');
-  layer.className = 'q-star-burst';
-  layer.style.left = cx + 'px';
-  layer.style.top = cy + 'px';
-  document.body.appendChild(layer);
-
-  // Mười ngôi sao lớn bắn tỏa tròn; mỗi sao kéo theo một chuỗi sao nhỏ màu trắng.
-  for (let i = 0; i < 10; i++) {
-    const angle = (-Math.PI / 2) + (Math.PI * 2 * i / 10) + (Math.random() - .5) * .18;
-    const distance = 105 + Math.random() * 95;
-    const dx = Math.cos(angle) * distance;
-    const dy = Math.sin(angle) * distance;
-    const big = document.createElement('span');
-    big.className = 'q-star-big';
-    big.textContent = i % 2 === 0 ? '✦' : '✧';
-    big.style.setProperty('--dx', dx + 'px');
-    big.style.setProperty('--dy', dy + 'px');
-    big.style.setProperty('--size', (35 + Math.random() * 19) + 'px');
-    big.style.animationDelay = (Math.random() * 70) + 'ms';
-    layer.appendChild(big);
-
-    const trailCount = 7 + Math.floor(Math.random() * 4);
-    for (let j = 0; j < trailCount; j++) {
-      const tiny = document.createElement('span');
-      tiny.className = 'q-star-trail';
-      tiny.textContent = j % 3 === 0 ? '✦' : '✧';
-      const t = .18 + j * (.075 + Math.random() * .018);
-      tiny.style.setProperty('--tx', (dx * t + (Math.random() - .5) * 32) + 'px');
-      tiny.style.setProperty('--ty', (dy * t + (Math.random() - .5) * 32) + 'px');
-      tiny.style.setProperty('--tiny-size', (9 + Math.random() * 10) + 'px');
-      tiny.style.animationDelay = (35 + j * 24 + Math.random() * 45) + 'ms';
-      layer.appendChild(tiny);
-    }
-  }
-  setTimeout(() => layer.remove(), 1450);
-}
-
 async function addExpense(date, amount, note) {
   const tmp = { id: 'tmp-' + (++tmpN), spent_on: date, amount, note: note || '', created_at: new Date().toISOString() };
   S.expenses.push(tmp); FLASH = date; refresh();
   try {
     const row = await track(async () => must(await sb.from('expenses').insert({ spent_on: date, amount, note: note || '' }).select('id,created_at').single()));
-    tmp.id = row.id; tmp.created_at = row.created_at; cacheSave(); renderDaySheet(); celebrateQuickAdd();
+    tmp.id = row.id; tmp.created_at = row.created_at; cacheSave(); renderDaySheet();
   } catch (e) { S.expenses = S.expenses.filter((x) => x !== tmp); refresh(); fail(e); }
 }
 async function updateExpense(id, amount, note) {
