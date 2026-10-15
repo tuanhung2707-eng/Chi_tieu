@@ -379,3 +379,152 @@
   border-color: #a8c9f5;
 }
 .wk .day.void { background: transparent; }
+
+/*trang trí nền*/
+```css
+/* ==========================================
+   CONCEPT: PASTEL OCEAN — ĐẠI DƯƠNG ÊM DỊU
+   ========================================== */
+
+/* Nền đại dương xanh pastel */
+body {
+  background:
+    radial-gradient(ellipse at 12% 15%, rgba(119, 207, 246, .18), transparent 38%),
+    radial-gradient(ellipse at 88% 72%, rgba(99, 180, 238, .14), transparent 42%),
+    linear-gradient(180deg, #f2f9ff 0%, #eaf6ff 55%, #e4f3ff 100%);
+  background-attachment: fixed;
+}
+
+/* Lớp trang trí nằm sau nội dung */
+.bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wrap {
+  position: relative;
+  z-index: 1;
+}
+
+/* Bong bóng nước: to, trong suốt, có ánh sáng */
+.bub {
+  position: absolute;
+  bottom: -60px;
+  left: var(--x);
+  width: calc(var(--s) * 1.5);
+  height: calc(var(--s) * 1.5);
+  border-radius: 50%;
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      circle at 30% 25%,
+      rgba(255, 255, 255, .95) 0%,
+      rgba(255, 255, 255, .32) 18%,
+      rgba(119, 207, 246, .12) 58%,
+      rgba(83, 169, 225, .08) 100%
+    );
+
+  border: 1px solid rgba(255, 255, 255, .8);
+
+  box-shadow:
+    inset -5px -7px 16px rgba(95, 183, 232, .08),
+    0 4px 18px rgba(90, 177, 230, .08);
+
+  animation: oceanBubble var(--d) linear var(--w) infinite;
+  will-change: transform, opacity;
+}
+
+@keyframes oceanBubble {
+  0% {
+    transform: translate3d(0, 0, 0) scale(.85);
+    opacity: 0;
+  }
+  12% {
+    opacity: .7;
+  }
+  40% {
+    transform: translate3d(22px, -38vh, 0) scale(1);
+    opacity: .55;
+  }
+  70% {
+    transform: translate3d(-18px, -76vh, 0) scale(1.08);
+    opacity: .4;
+  }
+  100% {
+    transform: translate3d(12px, -115vh, 0) scale(1.15);
+    opacity: 0;
+  }
+}
+
+/* Ánh sáng mặt nước chuyển động rất chậm */
+.bg::before {
+  content: "";
+  position: absolute;
+  width: 70vw;
+  height: 70vw;
+  min-width: 420px;
+  min-height: 420px;
+  top: -35vw;
+  left: -15vw;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(116, 205, 245, .15) 0%,
+    rgba(164, 224, 249, .07) 42%,
+    transparent 70%
+  );
+
+  animation: oceanLight 18s ease-in-out infinite alternate;
+}
+
+.bg::after {
+  content: "";
+  position: absolute;
+  width: 60vw;
+  height: 60vw;
+  min-width: 360px;
+  min-height: 360px;
+  right: -25vw;
+  bottom: -35vw;
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(92, 184, 232, .12) 0%,
+    rgba(155, 220, 248, .06) 45%,
+    transparent 72%
+  );
+
+  animation: oceanLight 24s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes oceanLight {
+  from {
+    transform: translate3d(-12px, 0, 0) scale(1);
+  }
+  to {
+    transform: translate3d(35px, 22px, 0) scale(1.12);
+  }
+}
+
+/* Giữ chuyển động nhẹ nhàng trên điện thoại */
+@media (max-width: 600px) {
+  .bub:nth-child(n+9) {
+    display: none;
+  }
+}
+
+/* Tôn trọng cài đặt giảm chuyển động của thiết bị */
+@media (prefers-reduced-motion: reduce) {
+  .bub,
+  .bg::before,
+  .bg::after {
+    animation: none !important;
+  }
+}
+```
