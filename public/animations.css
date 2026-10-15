@@ -564,7 +564,7 @@ body {
 
   /* cá bơi ngang rồi quay đầu ở hai mép; cả đàn bơi cùng nhịp */
   .fish { left:7px; --wd:max(13px,calc(var(--gw) * var(--f,.15))); width:var(--wd); opacity:.55;
-          --sx:max(0px,calc(var(--gw) - var(--wd) - 14px)); animation:swim var(--t,30s) linear var(--dl,0s) infinite; }
+          --sx: max(0px, calc(var(--gw) - var(--wd) - 14px)); animation:swim var(--t,30s) linear var(--dl,0s) infinite; }
   .fish svg { animation:fishBob 3.2s ease-in-out infinite alternate; }
   @keyframes swim {
     0%   { transform:translateX(0) scaleX(1); }
