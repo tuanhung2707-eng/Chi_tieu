@@ -211,13 +211,7 @@
 /* ---------- Hoạt ảnh nền ---------- */
 .bg { position:fixed; inset:0; z-index:0; overflow:hidden; pointer-events:none; }
 .wrap { position:relative; z-index:1; }
-.blob { position:absolute; border-radius:50%; will-change:transform;
-        background:radial-gradient(circle,rgba(139,201,243,.55),rgba(139,201,243,0) 68%); }
-.b1 { width:540px; height:540px; left:-150px; top:-130px; animation:drift1 26s ease-in-out infinite; }
-.b2 { width:480px; height:480px; right:-170px; top:30%; animation:drift2 33s ease-in-out infinite;
-      background:radial-gradient(circle,rgba(196,228,252,.7),rgba(196,228,252,0) 68%); }
-.b3 { width:440px; height:440px; left:18%; bottom:-190px; animation:drift3 29s ease-in-out infinite;
-      background:radial-gradient(circle,rgba(168,228,222,.42),rgba(168,228,222,0) 68%); }
+
 .bub { position:absolute; bottom:-40px; left:var(--x); width:var(--s); height:var(--s); border-radius:50%; opacity:0;
        background:radial-gradient(circle at 30% 28%,rgba(255,255,255,.95),rgba(255,255,255,.2) 58%),rgba(139,201,243,.28);
        border:1px solid rgba(255,255,255,.75); box-shadow:0 2px 8px rgba(102,174,232,.12);
