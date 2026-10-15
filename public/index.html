@@ -318,7 +318,7 @@
   @media (min-width:760px) { #app { grid-template-rows:auto 1fr; } }
 
 </style>
-<link rel="stylesheet" href="animations.css?v=1">
+<link rel="stylesheet" href="animations.css?v=3">
 </head>
 <body>
 <div class="bg" aria-hidden="true"><i class="blob b1"></i><i class="blob b2"></i><i class="blob b3"></i><i class="bub" style="--x:6%;--s:16px;--d:17s;--w:-0s"></i><i class="bub" style="--x:15%;--s:10px;--d:23s;--w:-5s"></i><i class="bub" style="--x:26%;--s:22px;--d:19s;--w:-9s"></i><i class="bub" style="--x:38%;--s:12px;--d:26s;--w:-2s"></i><i class="bub" style="--x:50%;--s:18px;--d:21s;--w:-12s"></i><i class="bub" style="--x:62%;--s:9px;--d:24s;--w:-7s"></i><i class="bub" style="--x:73%;--s:20px;--d:18s;--w:-3s"></i><i class="bub" style="--x:84%;--s:13px;--d:27s;--w:-10s"></i><i class="bub" style="--x:92%;--s:24px;--d:20s;--w:-14s"></i><i class="bub" style="--x:45%;--s:8px;--d:29s;--w:-16s"></i></div>
@@ -650,6 +650,73 @@ function floatText(anchor, text) {
   s.style.left = (r.left + r.width / 2) + 'px'; s.style.top = (r.top + 4) + 'px';
   document.body.appendChild(s);
   setTimeout(() => { if (s.parentNode) s.parentNode.removeChild(s); }, 1000);
+}
+
+// Pháo hoa sao trắng: 10 sao lớn bắn ra quanh nút rồi rơi theo vòng cung, mờ dần; nhiều sao nhỏ bay theo sau.
+// Chỉnh số lượng/kích thước/độ mạnh ngay ở các hằng số bên dưới; màu và quầng sáng chỉnh trong animations.css (mục 9).
+const STAR_PATH = 'M12 1.6l3.05 6.95 7.55.72-5.7 5.05 1.7 7.4L12 17.7 5.4 21.72l1.7-7.4-5.7-5.05 7.55-.72z';
+function starSvg(size) {
+  return '<svg viewBox="0 0 24 24" width="' + size + '" height="' + size + '" aria-hidden="true"><path d="' + STAR_PATH + '"/></svg>';
+}
+function starBurst(anchor) {
+  if (REDUCE || !anchor || !anchor.animate) return;
+  const BIG = 10, TRAIL = 3, SPARKLES = 10;            // số sao lớn, số sao nhỏ theo sau mỗi sao lớn, sao li ti thêm
+  const G = 760, STEPS = 18;                            // trọng lực (px/s²) và độ mịn của đường cong
+  const r = anchor.getBoundingClientRect();
+  const cx = r.left + r.width / 2, cy = r.top + r.height / 2, rx = r.width / 2, ry = r.height / 2;
+  const k = Math.min(1, Math.max(.55, window.innerWidth / 900));   // màn hình nhỏ thì bắn gần hơn
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  const layer = document.createElement('div');
+  layer.className = 'fx-layer'; layer.setAttribute('aria-hidden', 'true');
+  document.body.appendChild(layer);
+  let last = 0;
+
+  function fly(size, big, ox, oy, vx, vy, T, delay, peak) {
+    const el = document.createElement('span');
+    el.className = 'fx-star' + (big ? ' big' : '');
+    el.innerHTML = starSvg(size.toFixed(1));
+    layer.appendChild(el);
+    const spin = (big ? rnd(260, 620) : rnd(140, 420)) * (Math.random() < .5 ? -1 : 1);
+    const frames = [];
+    for (let i = 0; i <= STEPS; i++) {
+      const p = i / STEPS, t = T * p;
+      const x = ox + vx * t - size / 2, y = oy + vy * t + 0.5 * G * t * t - size / 2;   // quỹ đạo parabol
+      const grow = p < .14 ? .15 + .85 * (p / .14) : 1 - .28 * ((p - .14) / .86);
+      const op = p < .08 ? peak * (p / .08) : p < .5 ? peak : peak * (1 - (p - .5) / .5);  // sáng rồi nhạt dần
+      frames.push({ transform: 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) rotate(' + (spin * p).toFixed(0) + 'deg) scale(' + grow.toFixed(3) + ')',
+                    opacity: Math.max(0, op).toFixed(3), offset: p });
+    }
+    el.animate(frames, { duration: T * 1000, delay: delay, easing: 'linear', fill: 'both' });
+    last = Math.max(last, T * 1000 + delay);
+  }
+
+  const a0 = Math.random() * Math.PI * 2;
+  for (let i = 0; i < BIG; i++) {                       // sao lớn: chia đều quanh nút
+    const ang = a0 + (i * 2 * Math.PI) / BIG + rnd(-.18, .18), ca = Math.cos(ang), sa = Math.sin(ang);
+    const ox = cx + ca * rx * .92, oy = cy + sa * ry * .92;
+    const sp = rnd(440, 760) * k, vx = ca * sp * .9, vy = sa * sp - 380 * k, T = rnd(1.5, 1.85);
+    fly(rnd(28, 46) * Math.max(.8, k), true, ox, oy, vx, vy, T, 0, 1);
+    for (let j = 1; j <= TRAIL; j++) {                  // sao nhỏ đi theo cùng đường, trễ dần
+      fly(rnd(7, 13), false, ox, oy, vx * rnd(.93, 1.07), vy * rnd(.93, 1.07), T * rnd(.9, 1.05), j * rnd(55, 85), 1);
+    }
+  }
+  for (let i = 0; i < SPARKLES; i++) {                  // vài sao li ti lấp lánh quanh nút
+    const ang = rnd(0, Math.PI * 2), sp = rnd(160, 420) * k;
+    fly(rnd(5, 9), false, cx + rnd(-rx, rx) * .9, cy + rnd(-ry, ry), Math.cos(ang) * sp, Math.sin(ang) * sp - 220 * k, rnd(1.1, 1.5), rnd(0, 260), .9);
+  }
+
+  [0, 140].forEach((dl, n) => {                         // hai vòng sáng lóe quanh nút
+    const ring = document.createElement('span');
+    ring.className = 'fx-ring';
+    ring.style.cssText = 'left:' + r.left + 'px;top:' + r.top + 'px;width:' + r.width + 'px;height:' + r.height + 'px';
+    layer.appendChild(ring);
+    ring.animate([{ transform: 'scale(1)', opacity: n ? .7 : .95 }, { transform: n ? 'scale(1.16,1.9)' : 'scale(1.07,1.4)', opacity: 0 }],
+                 { duration: 600, delay: dl, easing: 'cubic-bezier(.2,.7,.3,1)', fill: 'both' });
+    last = Math.max(last, 600 + dl);
+  });
+  anchor.classList.remove('fx-pop'); void anchor.offsetWidth; anchor.classList.add('fx-pop');
+  setTimeout(() => anchor.classList.remove('fx-pop'), 440);
+  setTimeout(() => { if (layer.parentNode) layer.parentNode.removeChild(layer); }, last + 250);
 }
 
 /* ---------- màn hình ---------- */
@@ -1073,6 +1140,7 @@ function bind() {
     addExpense(date, amt, note);
   }
   $('qGo').onclick = quickSubmit;
+  $('qGo').addEventListener('click', () => starBurst($('qGo')));
   ['qAmt', 'qNote'].forEach((id) => $(id).addEventListener('keydown', (e) => { if (e.key === 'Enter') quickSubmit(); }));
 
   // bảng tuần

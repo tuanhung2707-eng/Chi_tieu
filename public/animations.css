@@ -12,6 +12,7 @@
      6. Cảnh đồng cỏ trong thẻ "Hôm nay còn được tiêu"
      7. Nút "Thêm vào hôm nay" (viền sáng + ánh sáng lướt)
      8. Họa tiết lịch các ngày trong kỳ
+     9. Pháo hoa sao trắng khi bấm "Thêm vào hôm nay" (phần JS là hàm starBurst trong index.html)
    ===================================================================== */
 
 /* ---------- 1. Giảm chuyển động ---------- */
@@ -343,3 +344,24 @@
   .wk::before, .wk:nth-child(even)::before { -webkit-mask-size:120px 120px; }
 }
 
+/* ---------- 9. Pháo hoa sao trắng khi bấm "Thêm vào hôm nay" ---------- */
+/* Sao được tạo bằng JavaScript (starBurst). Ở đây chỉ định kiểu: màu trắng + quầng sáng để nổi trên nền sáng. */
+.fx-layer { position:fixed; inset:0; z-index:60; pointer-events:none; overflow:hidden; }
+.fx-star {
+  position:absolute; left:0; top:0; opacity:0; will-change:transform,opacity;
+  filter:drop-shadow(0 0 2px rgba(48,122,190,.65)) drop-shadow(0 0 7px rgba(255,255,255,.95));
+}
+.fx-star svg { display:block; }
+.fx-star path { fill:#fff; stroke:rgba(60,140,210,.55); stroke-width:.8; paint-order:stroke; stroke-linejoin:round; }
+.fx-star.big {
+  filter:drop-shadow(0 0 4px rgba(40,115,190,.8)) drop-shadow(0 0 14px rgba(255,255,255,1)) drop-shadow(0 0 28px rgba(140,200,250,.95));
+}
+/* vòng sáng lóe ra quanh nút lúc bấm */
+.fx-ring {
+  position:absolute; border-radius:14px; border:2px solid #fff; opacity:0; transform-origin:center;
+  box-shadow:0 0 0 1px rgba(110,180,230,.45), 0 0 20px rgba(255,255,255,.95), inset 0 0 14px rgba(255,255,255,.7);
+}
+/* nút nảy nhẹ khi bấm (giữ nguyên hai hoạt ảnh sáng viền đang chạy) */
+#qGo.fx-pop { animation:softGlow 5s ease-in-out infinite, qgoRim 3.4s ease-in-out infinite, qgoPop .42s cubic-bezier(.2,.8,.2,1); }
+@keyframes qgoPop { 0% { transform:scale(1); } 28% { transform:scale(.96); } 62% { transform:scale(1.035); } 100% { transform:scale(1); } }
+@media (prefers-reduced-motion:reduce) { .fx-layer { display:none; } }
