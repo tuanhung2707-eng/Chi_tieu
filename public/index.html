@@ -322,75 +322,6 @@
   /* Thẻ ngân sách và ô thêm khoản chi nằm cạnh nhau: dồn khoảng trống xuống dưới 3 ô tổng quan */
   @media (min-width:760px) { #app { grid-template-rows:auto 1fr; } }
 
-  /* Điều hướng giữa Sổ chi tiêu và Công việc */
-  .main-nav { display:flex; gap:6px; padding:5px; margin:0 0 16px; border:1px solid var(--line); border-radius:15px; background:rgba(255,255,255,.78); }
-  .main-nav button { flex:1; border:0; background:transparent; border-radius:11px; padding:10px 14px; font-size:13px; font-weight:750; color:var(--muted); }
-  .main-nav button.on { background:#e6f4ff; color:var(--accent-deep); box-shadow:0 2px 7px rgba(71,128,171,.08); }
-  #workPage { min-width:0; }
-  #work { min-height:240px; overflow:hidden; }
-  #work .wm-tabs { display:flex; gap:5px; flex-wrap:wrap; margin-bottom:16px; }
-  #work .wm-tabs button { flex:1; }
-  #work .wm-panel { min-width:0; }
-  #work .wm-bar { display:flex; align-items:center; gap:9px; margin-bottom:12px; }
-  #work .wm-search { flex:1; min-width:0; }
-  #work .wm-search input { width:100%; }
-  #work .wm-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr)); gap:12px; }
-  #work .wm-card { min-width:0; overflow:hidden; border:1px solid var(--line); border-radius:15px; background:#fff; cursor:pointer; }
-  #work .wm-card-b, #work .wm-vh, #work .wm-va { padding:12px; }
-  #work .wm-card h3 { margin:0 0 5px; font-size:14px; overflow-wrap:anywhere; }
-  #work .wm-card p { margin:0; color:var(--muted); font-size:12px; }
-  #work .wm-cover { height:125px; display:grid; place-items:center; background:#f1f8ff; color:var(--accent-deep); overflow:hidden; }
-  #work .wm-cover img { width:100%; height:100%; object-fit:cover; }
-  #work .wm-empty { color:var(--muted); text-align:center; padding:24px 10px; font-size:13px; }
-  #work .wm-tags { margin-bottom:12px; }
-  #work .wm-modal { z-index:30; }
-  #work .wm-wide { max-width:760px; }
-  #work .wm-light { z-index:40; }
-  #work .wm-panel .field { margin-bottom:10px; }
-  #work .wm-sec { margin:16px 0; }
-  #work .wm-sec h4 { margin:0 0 6px; font-size:13px; }
-  #work .wm-txt { font-size:13px; line-height:1.65; overflow-wrap:anywhere; }
-  #work .wm-photos, #work .wm-gal { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
-  #work .wm-ph { position:relative; width:76px; height:76px; }
-  #work .wm-ph img, #work .wm-gal img { width:100%; height:100%; object-fit:cover; border-radius:10px; }
-  #work .wm-ph button { position:absolute; top:2px; right:2px; border:0; border-radius:50%; background:#fff; }
-  #work .wm-addph { border:1px dashed var(--line); background:#f8fbff; border-radius:10px; padding:12px; }
-  #work .wm-gal button { width:90px; height:90px; border:0; padding:0; background:none; }
-  #work .wm-ask-t { margin-bottom:16px; font-weight:700; }
-  #work .wm-asksheet { max-width:420px; }
-  #work .wm-light { display:none; position:fixed; inset:0; background:rgba(20,35,50,.92); align-items:center; justify-content:center; }
-  #work .wm-light.on { display:flex; }
-  #work .wm-light img { max-width:88vw; max-height:82vh; object-fit:contain; }
-  #work .wm-lx, #work .wm-ln { position:absolute; border:0; border-radius:50%; width:40px; height:40px; background:rgba(255,255,255,.18); color:#fff; font-size:24px; }
-  #work .wm-lx { top:18px; right:18px; }
-  #work .wm-lp { left:15px; } #work .wm-lnx { right:15px; }
-  #work .wm-tabs button.on { background:#fff; color:var(--accent-deep); }
-  #work .wm-dh { margin-bottom:12px; }
-  #work .wm-dh h2 { margin-bottom:5px; }
-  #work .wm-tl { display:flex; gap:5px; flex-wrap:wrap; margin-top:8px; }
-  #work .wm-tl span { font-size:10px; border-radius:99px; padding:4px 7px; background:var(--chip); color:var(--accent-deep); }
-  #work .wm-vi { cursor:default; }
-  #work .wm-vh { display:flex; justify-content:space-between; gap:8px; }
-  #work .wm-fi { padding:12px; font-weight:800; color:var(--accent-deep); }
-  #work .wm-ui { width:100%; display:flex; gap:8px; align-items:center; text-align:left; border:1px solid var(--line); border-radius:10px; padding:9px; background:#fff; margin:4px 0; }
-  #work .wm-dv { display:block; }
-  #work .wm-mon { margin:12px 0; padding:10px; border:1px solid var(--line); border-radius:14px; }
-  #work .wm-wd, #work .wm-days { display:grid; grid-template-columns:repeat(7,minmax(0,1fr)); gap:4px; }
-  #work .wm-wd i { text-align:center; font-size:10px; color:var(--muted); font-style:normal; }
-  #work .wm-d { min-height:32px; border:1px solid transparent; border-radius:8px; background:#f5faff; font-size:11px; }
-  #work .wm-d.today { border-color:var(--accent); background:#e6f4ff; }
-  #work .wm-d.has { background:#dff3ed; }
-  #work .wm-d em { display:flex; justify-content:center; gap:2px; }
-  #work .wm-d em b, #work .wm-ni .c-blue, #work .wm-ui .c-blue { width:5px; height:5px; border-radius:50%; background:#66aee8; }
-  #work .wm-ni { display:flex; align-items:center; gap:8px; margin:6px 0; }
-  #work .wm-nt { flex:1; min-width:0; }
-  #work .wm-ib { border:0; background:transparent; color:var(--bad); }
-  #work .wm-cols { display:flex; gap:8px; margin:10px 0; }
-  #work .wm-cols button { width:24px; height:24px; border:2px solid white; border-radius:50%; box-shadow:0 0 0 1px var(--line); background:#66aee8; }
-  #work .wm-cols button.on { box-shadow:0 0 0 2px var(--accent-deep); }
-  #work .c-green { background:#57b99b !important; } #work .c-pink { background:#e58ba0 !important; } #work .c-orange { background:#e8b15f !important; } #work .c-purple { background:#a89be8 !important; } #work .c-blue { background:#66aee8 !important; }
-  @media(max-width:600px) { #work .wm-bar { align-items:stretch; flex-direction:column; } #work .wm-grid { grid-template-columns:repeat(auto-fit,minmax(145px,1fr)); } #work .wm-tabs button { padding:8px 5px; font-size:11px; } }
-
 </style>
 <link rel="stylesheet" href="animations.css?v=5">
 </head>
@@ -456,15 +387,6 @@
   <section class="banner hidden" id="notice">
     <div id="noticeTxt"></div>
     <div class="twin"><button class="btn primary" id="nEdit" type="button">Sửa ngân sách</button><button class="btn" id="nHide" type="button">Giữ nguyên, ẩn</button></div>
-  </section>
-
-  <nav id="mainNav" class="main-nav hidden" aria-label="Điều hướng chính">
-    <button type="button" class="on" data-page="app">Sổ chi tiêu</button>
-    <button type="button" data-page="work">Công việc</button>
-  </nav>
-
-  <section id="workPage" class="hidden">
-    <div class="card" id="work"><div class="hint">Đang tải mục Công việc…</div></div>
   </section>
 
   <main id="app" class="hidden">
@@ -643,11 +565,11 @@
 </div></div>
 
 <div class="toast" id="toast"></div>
+<script type="module" src="work.js"></script>
 <script src="config.js"></script>
 
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.112.3/+esm';
-import { initWork, openWork, leaveWork } from './work.js';
 
 const CFG = window.APP_CONFIG || {};
 const $ = (id) => document.getElementById(id);
@@ -817,14 +739,10 @@ function starBurst(anchor) {
 
 /* ---------- màn hình ---------- */
 function show(view) {
-  ['login', 'setup', 'skeleton', 'empty', 'app'].forEach((v) => $(v).classList.toggle('hidden', v !== view && !(view === 'work' && v === 'app')));
-  $('app').classList.toggle('hidden', view !== 'app');
-  $('workPage').classList.toggle('hidden', view !== 'work');
-  $('mainNav').classList.toggle('hidden', view !== 'app' && view !== 'work');
+  ['login', 'setup', 'skeleton', 'empty', 'app'].forEach((v) => $(v).classList.toggle('hidden', v !== view));
   $('tools').classList.toggle('hidden', view === 'login' || view === 'setup');
   $('periodSel').classList.toggle('hidden', view !== 'app');
   if (view !== 'app') $('notice').classList.add('hidden');
-  Array.from($('mainNav').querySelectorAll('[data-page]')).forEach((b) => b.classList.toggle('on', b.getAttribute('data-page') === view));
 }
 
 /* ---------- lưu tạm để mở nhanh ---------- */
@@ -1199,11 +1117,6 @@ function openNew(first) {
 
 /* ---------- sự kiện ---------- */
 function bind() {
-  $('mainNav').addEventListener('click', (e) => {
-    const b = e.target.closest('[data-page]'); if (!b) return;
-    if (b.dataset.page === 'work') { show('work'); openWork(); }
-    else { leaveWork(); show('app'); refresh(); }
-  });
   $('qAmt').addEventListener('input', () => previewAmt('qAmt', 'qPrev', true));
   $('eAmt').addEventListener('input', () => previewAmt('eAmt', 'ePrev', true));
   $('qAmtChips').addEventListener('click', (e) => {
@@ -1348,7 +1261,6 @@ async function main() {
   const bad = !CFG.SUPABASE_URL || !CFG.SUPABASE_KEY || /YOUR-|xxxx/i.test(CFG.SUPABASE_URL + CFG.SUPABASE_KEY);
   if (bad) { show('setup'); return; }
   sb = createClient(CFG.SUPABASE_URL, CFG.SUPABASE_KEY, { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: false } });
-  initWork({ sb, getUser: () => S.user, toast, esc, setStatus });
   sb.auth.onAuthStateChange((evt) => { if (evt === 'SIGNED_OUT') { S.user = null; show('login'); } });
   $('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
