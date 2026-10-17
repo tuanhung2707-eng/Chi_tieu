@@ -565,7 +565,7 @@
 </div></div>
 
 <div class="toast" id="toast"></div>
-
+<script src="work.js"></script>
 <script src="config.js"></script>
 
 <script type="module">
@@ -581,7 +581,7 @@ const S = { user: null, settings: { cycle_day: 1, auto_rollover: true, timezone:
             periods: [], period: null, expenses: [], marks: {}, recent: [], days: [], summary: null, notice: null };
 let FILTER = 'all', QDATE = 'today', LIST_ANIM = true, FLASH = null, EDIT = null, EDIT_EXP = null;
 let pending = 0, tmpN = 0, lastSync = 0, toastT = null;
-<script src="work.js"></script>
+
 /* ---------- tiện ích ---------- */
 function pad(n) { return (n < 10 ? '0' : '') + n; }
 function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
