@@ -124,7 +124,7 @@ function build() {
       '<div class="modal wm-modal" id="wmDlg"><div class="sheet"></div></div>' +
       '<div class="modal wm-modal wm-askm" id="wmAsk"><div class="sheet wm-asksheet"><div class="wm-ask-t"></div>' +
       '<div class="twin"><button class="btn" data-no type="button">Hủy</button><button class="btn danger" data-ok type="button">Xóa</button></div></div></div>' +
-      '<div class="wm-light" id="wmLight"><button class="wm-lx" type="button" aria-label="Đóng" data-x>✕</button>' +
+      
       '<button class="wm-ln wm-lp" type="button" aria-label="Ảnh trước" data-p>‹</button><img alt=""><button class="wm-ln wm-lnx" type="button" aria-label="Ảnh sau" data-n>›</button></div>');
     $('wmDlg').addEventListener('mousedown', (e) => { if (e.target === $('wmDlg')) closeDlg(); });
     bindLight();
